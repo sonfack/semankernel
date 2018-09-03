@@ -21,4 +21,4 @@ for subj in g.subjects(predicate=None, object=None):
     if subjLabel:
         getLabel = subjLabel.pop(0)[1]
         if 'known' in getLabel:
-            print('Lablel '+getLabel+' similarity = %d   URI = %s',float(distance.get_jaro_distance(getLabel, 'known', winkler=True, scaling=0.1)), subj)
+            print('Lablel='+getLabel+'   similarity=%.2f    URI=%s'%(float(distance.get_jaro_distance(getLabel, 'known', winkler=True, scaling=0.1)), subj))
