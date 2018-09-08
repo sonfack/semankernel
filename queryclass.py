@@ -12,6 +12,11 @@ from  collections import Counter
 g = rdflib.Graph()
 g.parse("http://purl.obolibrary.org/obo/go.owl")
 
+f = open('ontologies.json', 'a+')
+firstLine = f.readline()
+if Counter(firstLine) != Counter('ID, URI, TYPE, LABEL'):
+    f.write('ID, URI, TYPE, LABEL')
+f.close()
 
 print(len(g))
 # n is a subclass name and its class name is good-behaviour
