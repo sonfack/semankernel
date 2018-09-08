@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b9d7e356-4fe5-46b7-b227-1c649306c111" name="Default" comment="">
       <change afterPath="$PROJECT_DIR$/go.owl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ontologies.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/queryclass.py" beforeDir="false" afterPath="$PROJECT_DIR$/queryclass.py" afterDir="false" />
     </list>
@@ -15,15 +16,15 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/seman$test.coverage" NAME="test Coverage Results" MODIFIED="1535639898240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1536367227183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1536432036380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="queryclass.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="queryclass.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/queryclass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+            <state relative-caret-position="307">
+              <caret line="69" column="42" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -31,20 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="go.owl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/go.owl">
-          <provider selected="true" editor-type-id="LargeFileEditor">
-            <state relative-caret-position="-165">
-              <caret line="79" column="17" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="graph.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
+      <file leaf-file-name="ontologies.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ontologies.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2653">
-              <caret line="1954" lean-forward="true" selection-start-line="1954" selection-end-line="1954" />
+            <state>
+              <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -91,7 +83,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -101,53 +92,13 @@
             </path>
             <path>
               <item name="seman" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seman" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seman" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seman" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seman" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seman" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="python3.5" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seman" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seman" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="python3.5" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seman" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seman" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="python3.5" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="rdflib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seman" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seman" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="python3.5" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="rdflib" type="462c0819:PsiDirectoryNode" />
-              <item name="extras" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -239,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535997585511</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="get object properties of concepts">
+      <created>1536369243134</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1536369243183</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -247,19 +205,19 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.3477306" side_tool="true" visible="true" weight="0.7453626" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.3499268" side_tool="true" visible="true" weight="0.311973" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6522694" visible="true" weight="0.7453626" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.45806453" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49926794" weight="0.3288364" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.65007323" visible="true" weight="0.311973" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49853587" weight="0.45699832" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19692533" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49926794" weight="0.39966273" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -277,9 +235,20 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="correct print out result" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct print out result" />
+    <MESSAGE value="get object properties of concepts" />
+    <option name="LAST_COMMIT_MESSAGE" value="get object properties of concepts" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/queryclass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -567,11 +536,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/void.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-945">
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-945" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/plugin.py">
@@ -586,34 +551,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/collection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1260">
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1260" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go.owl">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-9705">
+          <caret line="79" column="17" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2653">
+        <state relative-caret-position="29310">
           <caret line="1954" lean-forward="true" selection-start-line="1954" selection-end-line="1954" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/go.owl">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="-165">
-          <caret line="79" column="17" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="17" />
+    <entry file="file:///usr/lib/python3.5/collections/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1419">
+          <caret line="516" column="34" selection-start-line="516" selection-start-column="34" selection-end-line="516" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+        <state relative-caret-position="307">
+          <caret line="69" column="42" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ontologies.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="10" />
         </state>
       </provider>
     </entry>

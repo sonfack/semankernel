@@ -1,7 +1,11 @@
 import rdflib
+import json
 from rdflib import Graph
 from rdflib.namespace import RDFS, RDF, SKOS
 from pyjarowinkler import distance
+from  collections import Counter
+
+
 
 #g = Graph()
 #g.parse("data.owl")
@@ -31,10 +35,43 @@ for subj in g.subjects(predicate=None, object=None):
 #        print(subjLabel)
 #        if searchLabel in getLabel:
 #        print(subj)
+
         for p, o in g.predicate_objects(subject=subj):
-            print('predicate = ' + p)
-            print('object = ' + o)
-        print('Lablel='+subjLabel+'   similarity=%.2f  comment=%s \n'%(float(distance.get_jaro_distance(subjLabel, searchLabel, winkler=True, scaling=0.1)), g.comment(subject=subj, default='')))
+#            print('predicate = ' + p)
+            predidate = p
+#            print('object = ' + o)
+            object = o
+            tabPredicate = predidate.split('#')
+            if len(tabPredicate) == 2:
+                if Counter(tabPredicate[1]) == Counter('id'):
+                    tabObject = object.split('#')
+                    with open('ontologies.json', 'a+') as f:
+                        if len(tabObject) == 2:
+                            f.write(tabObject[1]+', ')
+                        else:
+                            f.write('None')
+                        f.write(subj+', ')
+                    f.close()
+
+                if Counter(tabPredicate[1]) == Counter('type'):
+                    tabObject = object.split('#')
+                    with open('ontologies.json', 'a+') as f:
+                        if len(tabObject) == 2:
+                            f.write(tabObject[1]+', ')
+                        else:
+                            f.write('None')
+                    f.close()
+                if Counter(tabPredicate[1]) == Counter('label'):
+                    tabObject = object.split('#')
+                    with open('ontologies.json', 'a+') as f:
+                        if len(tabObject) == 2:
+                            f.write(tabObject[1]+'\n')
+                        else:
+                            f.write('None')
+                            f.write('\n')
+                    f.close()
+
+#        print('Lablel='+subjLabel+'   similarity=%.2f  comment=%s \n'%(float(distance.get_jaro_distance(subjLabel, searchLabel, winkler=True, scaling=0.1)), g.comment(subject=subj, default='')))
 
 
 
