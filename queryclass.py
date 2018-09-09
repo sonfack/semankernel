@@ -1,82 +1,38 @@
 import rdflib
-import json
-from rdflib import Graph
-from rdflib.namespace import RDFS, RDF, SKOS
-from pyjarowinkler import distance
-from  collections import Counter
+from collections import Counter
 
-
-
-#g = Graph()
-#g.parse("data.owl")
 g = rdflib.Graph()
 g.parse("http://purl.obolibrary.org/obo/go.owl")
 
-f = open('ontologies.json', 'a+')
-firstLine = f.readline()
-if Counter(firstLine) != Counter('ID, URI, TYPE, LABEL'):
-    f.write('ID, URI, TYPE, LABEL')
-f.close()
-
 print(len(g))
-# n is a subclass name and its class name is good-behaviour
-# which i want to be the result
-#n = "pity"
-
-#for subj, obj in g.subject_objects(predicate=RDFS.subClassOf):
-#   print(g.label(subj))
-
-#for s in g.subjects(predicate=None,object=None):
-#    print(g.label(s))
-searchLabel = 'obsolete neurotransmitter'
+f = open('ontologies.txt', 'a+')
 for subj in g.subjects(predicate=None, object=None):
-
-#    print(pred)
-#subjLabel = g.preferredLabel(subj,lang='en',default=None, labelProperties=(SKOS.prefLabel, RDFS.label))
+    print('SUJET = '+subj)
     subjLabel = g.label(subj, default='')
-#    print(subjLabel+'  len='+str(len(subjLabel))+'\n')
-    if ((len(subjLabel) > 0) and (searchLabel in subjLabel)):
-#        getLabel = subjLabel.pop(0)[1]
-#        print(subjLabel)
-#        if searchLabel in getLabel:
-#        print(subj)
-
-        for p, o in g.predicate_objects(subject=subj):
-#            print('predicate = ' + p)
-            predidate = p
-#            print('object = ' + o)
-            object = o
-            tabPredicate = predidate.split('#')
-            if len(tabPredicate) == 2:
+    print('SUBJLABEL = '+subjLabel)
+    f.write('\n\n')
+    for p, o in g.predicate_objects(subject=subj):
+        predicate = p
+        print('PREDICATE = '+p)
+        object = o
+        print('OBJECT = '+o)
+        tabPredicate = predicate.split('#')
+        if len(tabPredicate) == 2:
+            if object and len(object) > 0:
                 if Counter(tabPredicate[1]) == Counter('id'):
+                    f.write(tabPredicate[1] + '=' + object + ', ')
+                elif Counter(tabPredicate[1]) == Counter('comment'):
+                    f.write(tabPredicate[1] + '=' + g.comment(subject=subj, default='') + ', ')
+                else:
                     tabObject = object.split('#')
-                    with open('ontologies.json', 'a+') as f:
-                        if len(tabObject) == 2:
-                            f.write(tabObject[1]+', ')
-                        else:
-                            f.write('None')
-                        f.write(subj+', ')
-                    f.close()
+                    if len(tabObject) == 2:
+                        f.write(tabPredicate[1] + '=' + tabObject[1] + ', ')
+                    else:
+                        f.write(tabPredicate[1] + '=' + object + ', ')
+            else:
+                f.write(tabPredicate[1]+'='+'None, ')
 
-                if Counter(tabPredicate[1]) == Counter('type'):
-                    tabObject = object.split('#')
-                    with open('ontologies.json', 'a+') as f:
-                        if len(tabObject) == 2:
-                            f.write(tabObject[1]+', ')
-                        else:
-                            f.write('None')
-                    f.close()
-                if Counter(tabPredicate[1]) == Counter('label'):
-                    tabObject = object.split('#')
-                    with open('ontologies.json', 'a+') as f:
-                        if len(tabObject) == 2:
-                            f.write(tabObject[1]+'\n')
-                        else:
-                            f.write('None')
-                            f.write('\n')
-                    f.close()
-
-#        print('Lablel='+subjLabel+'   similarity=%.2f  comment=%s \n'%(float(distance.get_jaro_distance(subjLabel, searchLabel, winkler=True, scaling=0.1)), g.comment(subject=subj, default='')))
+f.close()
 
 
 
