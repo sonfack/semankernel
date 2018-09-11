@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b9d7e356-4fe5-46b7-b227-1c649306c111" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ontologies.json" beforeDir="false" afterPath="$PROJECT_DIR$/ontologies.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/queryclass.py" beforeDir="false" afterPath="$PROJECT_DIR$/queryclass.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,18 +14,27 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/seman$test.coverage" NAME="test Coverage Results" MODIFIED="1535639898240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1536490981710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1536574201426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="queryclass.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/queryclass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+            <state relative-caret-position="254">
+              <caret line="30" column="42" lean-forward="true" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ontology.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ontology.json">
+          <provider selected="true" editor-type-id="LargeFileEditor">
+            <state>
+              <caret column="771" selection-end-column="1280000" />
             </state>
           </provider>
         </entry>
@@ -210,13 +218,13 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.23133236" side_tool="true" visible="true" weight="0.4772344" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.23206443" side_tool="true" visible="true" weight="0.14839798" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49926794" weight="0.3288364" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.76866764" visible="true" weight="0.4772344" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49853587" weight="0.45699832" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19692533" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7679356" weight="0.14839798" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4978038" weight="0.45699832" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19692533" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -245,6 +253,13 @@
     <option name="LAST_COMMIT_MESSAGE" value="get object properties of concepts that match a certain label and store in a file ( ontologies)" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ontology.json">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state>
+          <caret column="771" lean-forward="true" selection-end-column="1280000" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
@@ -255,13 +270,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ontologies.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1533211" selection-start-column="1533211" selection-end-column="1533211" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ontologies.json" />
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -282,13 +291,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/go.owl">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="240">
-          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/go.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29355">
@@ -306,13 +309,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/go.owl">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="140490">
-          <caret line="9366" column="67" selection-start-line="9366" selection-start-column="67" selection-end-line="9366" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/go.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29355">
@@ -330,13 +327,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/go.owl">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="8880">
-          <caret line="592" column="32" selection-start-line="592" selection-start-column="32" selection-end-line="592" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/go.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10845">
@@ -354,13 +345,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268950">
-          <caret line="17930" column="65" selection-start-line="17930" selection-start-column="65" selection-end-line="17930" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11130">
@@ -378,13 +363,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268950">
-          <caret line="17930" column="65" selection-start-line="17930" selection-start-column="65" selection-end-line="17930" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11130">
@@ -402,13 +381,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268950">
-          <caret line="17930" column="65" selection-start-line="17930" selection-start-column="65" selection-end-line="17930" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11130">
@@ -426,13 +399,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268950">
-          <caret line="17930" column="65" selection-start-line="17930" selection-start-column="65" selection-end-line="17930" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11130">
@@ -450,13 +417,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268950">
-          <caret line="17930" column="65" selection-start-line="17930" selection-start-column="65" selection-end-line="17930" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11130">
@@ -481,13 +442,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15345">
-          <caret line="1023" column="65" selection-start-line="1023" selection-start-column="65" selection-end-line="1023" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -512,13 +467,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="79" column="54" selection-start-line="79" selection-start-column="54" selection-end-line="79" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -570,13 +519,7 @@
         <state relative-caret-position="-1260" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/go.owl">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="-9705">
-          <caret line="79" column="17" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/go.owl" />
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29310">
@@ -591,20 +534,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data.owl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="17930" column="65" selection-start-line="17930" selection-start-column="65" selection-end-line="17930" selection-end-column="65" />
+    <entry file="file://$PROJECT_DIR$/data.owl" />
+    <entry file="file://$PROJECT_DIR$/ontologies.json" />
+    <entry file="file://$PROJECT_DIR$/ontology.json">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state>
+          <caret column="771" selection-end-column="1280000" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ontologies.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+        <state relative-caret-position="254">
+          <caret line="30" column="42" lean-forward="true" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
