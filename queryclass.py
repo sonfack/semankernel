@@ -1,20 +1,27 @@
 import rdflib
-import json
 from collections import Counter
-from rdflib import Graph, plugin
-from rdflib.serializer import Serializer
+from elasticsearch import Elasticsearch
 
+# Connect to the elastic cluster
+es=Elasticsearch([{'host':'172.17.0.2','port':9200}])
+
+ontoUrl = "to.owl"
+ontoType = 'to'
 g = rdflib.Graph()
-g.parse("http://purl.obolibrary.org/obo/go.owl")
+
+g.parse(ontoUrl)
 
 print(len(g))
-f = open('ontologies.txt', 'a+')
-f.write('{ \n')
+
+# dictionary
+data = {}
+
+count = 0
 for subj in g.subjects(predicate=None, object=None):
     print('SUJET = '+subj)
     subjLabel = g.label(subj, default='')
     print('SUBJLABEL = '+subjLabel)
-    f.write('\n\n')
+    concept = {}
     for p, o in g.predicate_objects(subject=subj):
         predicate = p
         print('PREDICATE = '+p)
@@ -24,21 +31,27 @@ for subj in g.subjects(predicate=None, object=None):
         if len(tabPredicate) == 2:
             if object and len(object) > 0:
                 if Counter(tabPredicate[1]) == Counter('id'):
-                    f.write(tabPredicate[1] + ':' + object + ', \n' )
+                    concept[tabPredicate[1]] = str(object)
                 elif Counter(tabPredicate[1]) == Counter('comment'):
-                    f.write(tabPredicate[1] + ':' + g.comment(subject=subj, default='') + ', \n')
+                    concept[tabPredicate[1]] = str(g.comment(subject=subj, default=''))
                 else:
                     tabObject = object.split('#')
                     if len(tabObject) == 2:
-                        f.write(tabPredicate[1] + ':' + tabObject[1] + ', \n')
+                        concept[tabPredicate[1]] = str(tabObject[1])
                     else:
-                        f.write(tabPredicate[1] + ':' + object + ', \n')
+                        concept[tabPredicate[1]] = str(object)
             else:
-                f.write(tabPredicate[1]+':'+'None, \n')
-f.write('\n }')
-f.close()
-
-
-
-
-
+                concept[tabPredicate[1]] = ''
+    print(concept)
+#    tabConcept.append(concept)
+    data[subj] = concept
+    count = count + 1
+    if count < 5:
+        res = es.index(index='ontology',doc_type= ontoType ,id = count, body=data)
+        concept.clear()
+        data.clear()
+#        with open('ontology.json', 'a+') as f:
+#           simplejson.dump(data, f)
+#        f.close()
+    else:
+        exit()
