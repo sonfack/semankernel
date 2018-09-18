@@ -104,21 +104,24 @@ def textProcessing(text):
     return stemWords
 
 
-def queryOntology(text):
+def queryOntology(listWords):
+    ourQuery = "*"
+    count = 0
+    for word in listWords:
+        count = count + 1
+        if count < len(listWords):
+            ourQuery = ourQuery+str(word)+"* OR *"
+        elif count == len(listWords):
+            ourQuery = ourQuery+str(word)+"*"
 
     # Connect to the elastic cluster
     es = Elasticsearch([{'host': '172.17.0.2', 'port': 9200}])
-    res = es.get(index='ontology',  doc_type='to', id=2)
-    print(res)
     res = es.search(index='ontology', body=
                                             {
                                                 "query": {
-                                                    "bool": {
-                                                        "should": [
-                                                            {"match": {
-                                                                "label": str(text)
-                                                            }}
-                                                        ]
+                                                    "query_string": {
+                                                        "fields": ["label", "*Synonym", "*Namespace"],
+                                                        "query": ourQuery
                                                     }
                                                 }
                                             }
@@ -128,7 +131,7 @@ def queryOntology(text):
 
 
 def main():
-    queryText = textProcessing('shoot')
+    queryText = textProcessing('leaf and fruit')
     print(queryText)
     queryOntology(queryText)
     #storeOntology()
