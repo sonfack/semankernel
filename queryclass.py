@@ -126,15 +126,25 @@ def queryOntology(listWords):
                                                 }
                                             }
                     )
-    print(res)
-#
+    return res
+
+
+def resultProcessin(result):
+    hits = result.get('hits')
+    total = hits.get('total')
+    print(total)
+    if total >= 1:
+        results = hits.get('hits')
+        print(results)
+    else:
+        print("Aucun resultat")
 
 
 def main():
+    # storeOntology()
     queryText = textProcessing('leaf and fruit')
-    print(queryText)
-    queryOntology(queryText)
-    #storeOntology()
+    result = queryOntology(queryText)
+    resultProcessin(result)
 
 
 if __name__ == '__main__':

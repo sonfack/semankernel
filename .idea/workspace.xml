@@ -13,7 +13,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/seman$test.coverage" NAME="test Coverage Results" MODIFIED="1535639898240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1537262882294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1537269540198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/seman$json.coverage" NAME="json Coverage Results" MODIFIED="1536698375920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -21,8 +21,8 @@
       <file leaf-file-name="queryclass.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/queryclass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12">
-              <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
+            <state relative-caret-position="205">
+              <caret line="137" column="21" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="21" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -235,11 +235,11 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.24231333" side_tool="true" visible="true" weight="0.44350758" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.24231333" side_tool="true" visible="true" weight="0.4721754" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49926794" weight="0.3288364" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7576867" visible="true" weight="0.44350758" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7576867" visible="true" weight="0.4721754" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49267936" weight="0.2816189" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16544656" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -515,8 +515,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12">
-          <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
+        <state relative-caret-position="205">
+          <caret line="137" column="21" selection-start-line="137" selection-start-column="21" selection-end-line="137" selection-end-column="21" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
