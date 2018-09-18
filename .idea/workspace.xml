@@ -2,178 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9d7e356-4fe5-46b7-b227-1c649306c111" name="Default" comment="transform file to json format">
-      <change afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/json.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ontologies.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ontology.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ontology2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/to.owl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch-6.3.1.dist-info/INSTALLER" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch-6.3.1.dist-info/METADATA" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch-6.3.1.dist-info/RECORD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch-6.3.1.dist-info/WHEEL" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch-6.3.1.dist-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/cat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/cluster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/indices.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/ingest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/nodes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/remote.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/snapshot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/deprecation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/graph.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/license.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/migration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/ml.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/monitoring.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/security.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/client/xpack/watcher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/compat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/connection/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/connection/base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/connection/http_requests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/connection/http_urllib3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/connection/pooling.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/connection_pool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/helpers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/helpers/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch/transport.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/cat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/cluster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/indices.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/ingest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/nodes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/remote.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/snapshot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/client/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/compat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/connection/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/connection/base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/connection/http_requests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/connection/http_urllib3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/connection/pooling.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/connection_pool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/helpers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/helpers/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/elasticsearch5/transport.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld-0.4.0-py3.5.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld-0.4.0-py3.5.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld-0.4.0-py3.5.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld-0.4.0-py3.5.egg-info/entry_points.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld-0.4.0-py3.5.egg-info/installed-files.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld-0.4.0-py3.5.egg-info/requires.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld-0.4.0-py3.5.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld/context.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld/errors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld/keys.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld/parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/rdflib_jsonld/util.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson-3.16.0-py3.5.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson-3.16.0-py3.5.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson-3.16.0-py3.5.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson-3.16.0-py3.5.egg-info/installed-files.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson-3.16.0-py3.5.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/_speedups.cpython-35m-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/compat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/decoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/encoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/errors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/ordered_dict.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/raw_json.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/scanner.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_bigint_as_string.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_bitsize_int_as_string.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_check_circular.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_decimal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_decode.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_default.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_dump.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_encode_basestring_ascii.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_encode_for_html.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_errors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_fail.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_float.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_for_json.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_indent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_item_sort_key.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_iterable.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_namedtuple.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_pass1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_pass2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_pass3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_raw_json.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_recursion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_scanstring.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_separators.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_speedups.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_str_subclass.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_subclass.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_tool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_tuple.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tests/test_unicode.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/simplejson/tool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/DESCRIPTION.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/INSTALLER" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/LICENSE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/METADATA" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/RECORD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/WHEEL" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/metadata.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3-1.23.dist-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/_collections.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/connection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/connectionpool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/_securetransport/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/_securetransport/bindings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/_securetransport/low_level.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/appengine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/ntlmpool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/pyopenssl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/securetransport.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/contrib/socks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/fields.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/filepost.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/packages/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/packages/backports/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/packages/backports/makefile.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/packages/ordered_dict.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/packages/six.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/packages/ssl_match_hostname/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/packages/ssl_match_hostname/_implementation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/poolmanager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/request.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/response.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/connection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/queue.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/request.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/response.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/retry.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/ssl_.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/timeout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/url.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.5/site-packages/urllib3/util/wait.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ontology.json" beforeDir="false" afterPath="$PROJECT_DIR$/ontology.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/queryclass.py" beforeDir="false" afterPath="$PROJECT_DIR$/queryclass.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -185,7 +16,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/seman$test.coverage" NAME="test Coverage Results" MODIFIED="1535639898240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1537178911359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/seman$queryclass.coverage" NAME="queryclass Coverage Results" MODIFIED="1537259128592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/seman$json.coverage" NAME="json Coverage Results" MODIFIED="1536698375920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -193,8 +24,8 @@
       <file leaf-file-name="queryclass.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/queryclass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="46" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="50" />
+            <state relative-caret-position="108">
+              <caret line="118" column="82" selection-start-line="118" selection-start-column="82" selection-end-line="118" selection-end-column="82" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -404,19 +235,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.23938507" side_tool="true" visible="true" weight="0.31871837" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.24231333" side_tool="true" visible="true" weight="0.44350758" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49926794" weight="0.3288364" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.76061493" visible="true" weight="0.31871837" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49487555" weight="0.45699832" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7576867" visible="true" weight="0.44350758" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49267936" weight="0.2816189" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16544656" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -427,6 +256,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,13 +273,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="transform file to json format" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/queryclass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ontologies.json" />
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -684,17 +507,18 @@
     <entry file="file://$PROJECT_DIR$/data.owl" />
     <entry file="file://$PROJECT_DIR$/ontologies.json" />
     <entry file="file://$PROJECT_DIR$/ontology.json" />
-    <entry file="file://$PROJECT_DIR$/json.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+    <entry file="file://$PROJECT_DIR$/json.py" />
+    <entry file="file://$PROJECT_DIR$/newsgroups.json">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-1785">
+          <caret column="1059" selection-start-column="1059" selection-end-column="1059" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/queryclass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="46" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="50" />
+        <state relative-caret-position="108">
+          <caret line="118" column="82" selection-start-line="118" selection-start-column="82" selection-end-line="118" selection-end-column="82" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
