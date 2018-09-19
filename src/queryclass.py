@@ -135,7 +135,10 @@ def resultProcessin(result):
     print(total)
     if total >= 1:
         results = hits.get('hits')
-        print(results)
+        for entity in results:
+            print(entity)
+
+
     else:
         print("Aucun resultat")
 
