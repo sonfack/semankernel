@@ -1,5 +1,13 @@
 import os
+import re
 from flask import Flask, render_template, request, url_for, redirect
+# NLTK Stop words
+from nltk.corpus import stopwords
+# NLTK tokenize
+from nltk.tokenize import word_tokenize
+# NLTK stemming
+from nltk.stem import PorterStemmer
+
 from werkzeug.utils import secure_filename
 
 from src.common import ontology
@@ -15,11 +23,55 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
+
+
+def resultProcessin(result):
+    hits = result.get('hits')
+    total = hits.get('total')
+    print(total)
+    resultListe = []
+    if total >= 1:
+        results = hits.get('hits')
+        for entity in results:
+            print(entity['_source'])
+            resultListe.append(entity['_source'])
+        return resultListe
+    else:
+        return False
+
+
+def textProcessing(text):
+    newText = text.lower()
+    newText = re.sub('[0-9]', '', newText)
+    newText = re.sub('[^ a-zA-Z0-9]', '', newText)
+    # print(newText)
+
+    # tokenize
+    word_tokens = word_tokenize(newText)
+
+    # load stop words
+    stop_words = stopwords.words('english')
+    # print(stop_words)
+
+    # Remove stop words
+    filterWords = [word for word in word_tokens if word not in stop_words]
+    # print(filterWords)
+
+    # stemming words
+    ps = PorterStemmer()
+    stemWords = []
+
+    for word in filterWords:
+        stemWords.append(ps.stem(word))
+    print(stemWords)
+    return stemWords
+
+
 def allowed_file(filename):
-    return '.' in filename and \
+ return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
+@app.route('/help')
 @app.route('/')
 def api():
     return """ 
@@ -29,11 +81,30 @@ def api():
                 <p><b>/api/index/indexName/typeName</b> : to get all the documents of the given type<i>ex : po for plant ontology</i></p>
                 <p>/<b>api/index/indexName/typeName/id</b> : to get the value of the docuement referenced by the id
                 <i>ex : 2  ; a document is a concept in the given typeName(ontology)</i></p>
+                <hr>
+                <p><a href='/home'>Go to home</a></p>
             """
 # welcome page
 @app.route('/home')
 def home():
-    return render_template('index.html')
+    onto = ontology.Ontology()
+    allindex = onto.noIndexQuery()
+    aggregations = allindex['aggregations']
+    typeAgg = aggregations['typesAgg']
+    buckets = typeAgg['buckets']
+    print(buckets)
+    types = []
+    for index in buckets:
+        indexVal = index['key']
+        alltype = onto.indexQuery(indexVal)
+        aggType = alltype['aggregations']
+        typeAggType = aggType['typesAgg']
+        print(typeAggType['buckets'])
+        types.append(typeAggType['buckets'])
+
+    print(types)
+
+    return render_template('user_stat.html', buckets=buckets, types=types)
 
 # admin page
 @app.route('/administrator')
@@ -61,7 +132,8 @@ def saveOntology():
                     type = request.form['type']
                     if onto.storeOntology(UPLOAD_FOLDER+'/'+filename,type, index):
                         message = 'Ontology saved successfully'
-                        return render_template('admin.html', message=message)
+                        return redirect(url_for('administrator', message=message, buckets=onto.buckets))
+
                     else:
                         message = 'Something went wrong while save ontology in database'
                         return render_template('admin.html', message=message)
@@ -72,25 +144,91 @@ def saveOntology():
 @app.route('/api/indexes', methods=['GET'])
 def ontologies():
     onto = ontology.Ontology()
-    allindexes = onto.noIndexQuery()
-    if allindexes:
-        print(allindexes)
-        return render_template()
+    allindex = onto.noIndexQuery()
+    if allindex:
+        aggregations = allindex['aggregations']
+        typeAgg = aggregations['typesAgg']
+        buckets = typeAgg['buckets']
+        return buckets
     else:
         message = 'Problem on your request'
-        return render_template('index.html', message=message
-                               )
+        return message
+
+
+@app.route('/getIndexes', methods=['GET'])
+def getIndexes():
+    onto = ontology.Ontology()
+    if onto.buckets:
+
+        return render_template('user_indexes.html', buckets=onto.buckets)
+    else:
+        message = 'Problem on your request'
+        return render_template('index.html', message=message)
+
 
 # print out the list of all the concepts of a given ontologyName
-@app.route('/api/ontology/<ontologyName>', methods=['GET'])
+@app.route('/api/index/<string:indexName>/<string:typeName>', methods=['POST'])
 def concepts():
+    onto = ontology.Ontology()
+
+    return render_template('user_stat.html', buckets=onto.buckets)
+
+
+# print out the list of all the concepts of a given ontologyName
+@app.route('/getTypes')
+def getTypes():
     pass
 
+
 # print out a concept of a given ontologyName given the concept's id
-@app.route('/api/ontology/<string:ontologyName>/<int:concetpId>')
-def concept(ontologyName, conceptId):
-    print(ontologyName)
-    print(conceptId)
+@app.route('/api/index/<string:index>/<string:typeName>/<int:concetpId>')
+def concept():
+    onto = ontology.Ontology()
+    return render_template('user_stat.html', buckets=onto.buckets)
+
+# case 1 not index selected
+@app.route('/getQueryNoIndex', methods=['POST'])
+def getQueryNoIndex():
+    onto = ontology.Ontology()
+    print('get query no index ')
+    if request.method == 'POST':
+        words = request.form['words']
+        print(words)
+        procewords = textProcessing(words)
+        # no type selected
+        if request.form['indexes'] == '0' and not request.form['newontology']:
+            results = onto.queryOntology(procewords)
+            finalResult = resultProcessin(results)
+            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=finalResult)
+        elif request.form['indexes'] == '0' and request.form['newontology']:
+            print('ici ')
+            newOnto = request.form['newontology']
+            print(newOnto)
+            onto.personalOntology(procewords, newOnto)
+        elif request.form['indexes'] != '0' and request.form['newontology']:
+            newOnto = request.form['newontology']
+            onto.personalOntology(procewords, newOnto)
+        elif request.form['indexes'] != '0' and not request.form['newontology']:
+            pass
+        else:
+            # a type selected
+            index = request.form['indexes']
+            print(index)
+            results = onto.queryOntology(procewords, indexValue=str(index))
+            finalResult = resultProcessin(results)
+            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=finalResult)
+
+    else:
+        return render_template('erro.html')
+
+
+# case 2 an index selected
+
+
+# case 3  no index selected and  a type selected
+
+
+# case 4 an index selected  and a type selected
 
 
 if __name__ == '__main__':

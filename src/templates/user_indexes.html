@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block content %}
+    {% if buckets %}
+        <div class="row">
+          <h4 style="text-align: center;">Indexes</h4>
+          <table class="table table-striped" style="text-align: center;">
+            <thead>
+              <tr>
+                <th>Index</th>
+                <th>Number documents</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for data in buckets %}
+              <tr>
+                <td>{{data.key}}</td>
+                <td>{{data.doc_count}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}
+{% endblock %}

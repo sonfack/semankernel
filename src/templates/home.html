@@ -1,0 +1,101 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+             <div class="row">
+                 <div class="col-md-4">
+                    <h3>Start annotation </h3>
+                </div>
+                 {% if message %}
+                    <div class="col-md-8 alert alert-warning">
+                       {{message}}
+                    </div>
+                 {% endif %}
+             </div>
+                <div class="row">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#textannotation" >Annotate a text</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#fileannotation" role="tab" >Annotate from a text</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade  in active" id="textannotation">
+                            <p style="margin-top: 2%; margin-bottom: 2%;">Enter words you want to annotate in the text erea. If you have many words, separate the by commas</p>
+                            <form class="form-horizontal" method="post" action="/getQueryNoIndex">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="wordstoannotate">Enter words to annotate</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control"  name="words" id="wordstoannotate" placeholder="word1 word2">
+                                    </div>
+                                </div>
+                                {% if buckets %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 justify-content-start" for="selectontology">Select an Ontology:</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="selectontology" name="indexes">
+                                            <option value="0" selected>Use all Ontologies</option>
+                                            {% for type in buckets %}
+                                            <option   value="{{type.key}}">{{type.key}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Enter Ontology here</label>
+                                    <div class="col-md-10">
+                                        <input name="newontology" value=""  class="form-control" placeholder="enter specific ontology here">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success col-md-offset-2 " value="Annotate now">
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="fileannotation">
+                            <p style="margin-top: 2%; margin-bottom: 2%">Annotate a CSV file</p>
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Select file to annotate</label>
+                                    <div class="col-md-10">
+                                        <input type="file"  id="annotatefile">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 justify-content-start" for="selectontology">Select an Ontology:</label>
+                                    <div class="col-md-10">
+                                        <label for="selectontologyfile"></label>
+                                        <select class="form-control" id="selectontologyfile">
+                                           <option selected>Use all Ontologies</option>
+                                            {% for type in buckets %}
+                                             <option   value="{{type.key}}">{{type.key}}</option>
+                                            {% endfor %}>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Enter Ontology here</label>
+                                    <div class="col-md-10">
+                                        <input name="newontology" value=""  class="form-control" placeholder="enter specific ontology here">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success col-lg-offset-2" value="Annotate now">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-4"  >
+            {% block stat %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

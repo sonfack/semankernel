@@ -14,6 +14,28 @@ class Ontology(object):
 
         self.ontoGraph = rdflib.Graph()
 
+        allindex = self.noIndexQuery()
+        if allindex:
+            aggregations = allindex['aggregations']
+            typeAgg = aggregations['typesAgg']
+            buckets = typeAgg['buckets']
+            self.buckets = buckets
+
+    def personalOntology(self, words, urlOnto):
+        # parsing the ontology
+        self.ontoGraph.parse(urlOnto)
+        for subj in self.ontoGraph.subjects(predicate=None, object=None):
+            subjLabel = self.ontoGraph.label(subj, default='')
+            for word in words:
+                if ((len(subjLabel) > 0) and word in str(subjLabel)):
+                    for p, o in self.ontoGraph.predicate_objects(subject=subj):
+                        predicate = p
+                        print('PREDICATE = '+predicate)
+                        object = o
+                        print('OBJECT = '+object)
+                break
+
+
     # this function takes a list of word and create and or contatenation for elasticsearch string query
     def createOrStringQuery(self, listWords):
         ourQuery = "*"
@@ -91,7 +113,7 @@ class Ontology(object):
 
                         actions.append(action)
                         count = count + 1
-                    helpers.bulk(es, actions,request_timeout=3000)
+                        helpers.bulk(es, actions, request_timeout=90000)
                     return True
                 else:
                     return False
@@ -112,7 +134,7 @@ class Ontology(object):
         # Connect to the elastic cluster
         storage = database.Database()
         es = storage.es
-        res = es.search( body=
+        res = es.search(body=
                                 {
                                     "aggs": {
                                         "typesAgg": {
@@ -148,14 +170,14 @@ class Ontology(object):
         return res
 
 
-    def queryOntology(self, listWords, typeValue, indexValue='ontology'):
+    def queryOntology(self, listWords, typeValue=None, indexValue=None):
 
         # Connect to the elastic cluster
         storage = database.Database()
         es = storage.es
         if isinstance(listWords, list) and len(listWords) > 0:
             ourQuery = self.createOrStringQuery(listWords)
-            if typeValue :
+            if not typeValue is None and not indexValue is None:
                 res = es.search(index=indexValue, doc_type=typeValue, body=
                                                                             {
                                                                                 "query": {
@@ -167,7 +189,7 @@ class Ontology(object):
                                                                             }, request_timeout=300
                                 )
                 return res
-            else:
+            elif typeValue is None and not indexValue is None:
                 res = es.search(index=indexValue, body=
                                                         {
                                                             "query": {
@@ -175,9 +197,27 @@ class Ontology(object):
                                                                     "fields": ["label", "*Synonym", "*Namespace, comment"],
                                                                     "query": ourQuery
                                                                 }
-                                                            }
+                                                            },
+                                                            "sort":
+                                                                {"_score": {"order": "desc"}}
                                                         }, request_timeout=300
                             )
                 return res
+            elif typeValue is None and indexValue is None:
+                res = es.search(body=
+                                    {   "size":  1000,
+                                        "query": {
+                                            "query_string": {
+                                                "fields": ["label", "*Synonym", "*Namespace, comment"],
+                                                "query": ourQuery
+                                            }
+                                        },
+                                        "sort":
+                                            {"_score": {"order": "desc"}}
+                                    }, request_timeout=300
+                                )
+                return res
+
+
         else:
             return False

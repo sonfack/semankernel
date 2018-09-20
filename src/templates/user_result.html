@@ -1,0 +1,31 @@
+{% extends "user_stat.html" %}
+{% block result %}
+    {% if finalResult %}
+    <div class="row"><h4>Result</h4></div>
+    <div class="row table-responsive" style="font-size: 8px; ">
+        <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
+        <table class="table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th style="text-align: center;">URI</th>
+                <th style="text-align: center;">Type</th>
+                <th style="text-align: center;">Lable</th>
+                <th style="text-align: center;">Synonyme</th>
+                <th style="text-align: center;">Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for data in finalResult %}
+          <tr>
+              <td style="font-size: 12px;">{{data.subject}}</td>
+              <td style="font-size: 12px;">{{data.type}}</td>
+              <td style="font-size: 12px;">{{data.label}}</td>
+              <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
+              <td style="font-size: 12px;">{{data.comment}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% endif %}
+{% endblock %}

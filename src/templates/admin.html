@@ -10,10 +10,10 @@
     <title>Administrator</title>
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Seman</a>
+                <a class="navbar-brand" href="/administrator">Seman</a>
             </div>
             <ul class="nav navbar-nav">
               <li><a href="#">Indexes</a></li>
@@ -65,7 +65,49 @@
                 <div class="col-md-6">
                     <div class="row"><h4 style="text-align: center;">Some statistics</h4></div>
                     <div class="row" style="text-align: center">
-                        statistics
+                        {% if buckets %}
+                            <div class="row table-responsive">
+                              <h4 style="text-align: center;">Indexes</h4>
+                              <table class="table" style="text-align: center;">
+                                <thead>
+                                  <tr>
+                                    <th style="text-align: center;">Index</th>
+                                    <th style="text-align: center;">Number documents</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                {% for data in buckets %}
+                                  <tr>
+                                    <td>{{data.key}}</td>
+                                    <td>{{data.doc_count}}</td>
+                                  </tr>
+                                {% endfor %}
+                                </tbody>
+                              </table>
+                            </div>
+                        {% endif %}
+                          <hr>
+                        {% if types %}
+                            <div class="row table-responsive">
+                              <h4 style="text-align: center;">Types</h4>
+                              <table class="table" style="text-align: center;">
+                                <thead >
+                                  <tr>
+                                    <th style="text-align: center;" >No</th>
+                                    <th style="text-align: center;">Type name</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                {% for data in types %}
+                                  <tr>
+                                      <td>{{loop.index}}</td>
+                                      <td>{{data.key}}</td>
+                                  </tr>
+                                {% endfor %}
+                                </tbody>
+                              </table>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

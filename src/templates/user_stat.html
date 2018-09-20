@@ -1,0 +1,46 @@
+{% extends "home.html" %}
+{% block stat %}
+    {% if buckets %}
+        <div class="row table-responsive">
+          <h4 style="text-align: center;">Indexes</h4>
+          <table class="table" style="text-align: center;">
+            <thead>
+              <tr>
+                <th style="text-align: center;">Index</th>
+                <th style="text-align: center;">Number documents</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for data in buckets %}
+              <tr>
+                <td>{{data.key}}</td>
+                <td>{{data.doc_count}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}
+      <hr>
+    {% if types %}
+        <div class="row table-responsive">
+          <h4 style="text-align: center;">Types</h4>
+          <table class="table" style="text-align: center;">
+            <thead >
+              <tr>
+                <th style="text-align: center;" >No</th>
+                <th style="text-align: center;">Type name</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for data in types %}
+              <tr>
+                  <td>{{loop.index}}</td>
+                  <td>{{data[0].key}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    {% endif %}
+{% endblock %}
