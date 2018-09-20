@@ -15,11 +15,11 @@ def storeOntology():
 
     # Connect to the elastic cluster
     es = Elasticsearch([{'host': '172.17.0.2', 'port': 9200}])
-    ontoUrl = "to.owl"
+    ontoUrl = "data/to.owl"
     ontoType = 'to'
     g = rdflib.Graph()
 
-    g   .parse(ontoUrl)
+    g.parse(ontoUrl)
 
     print(len(g))
 
@@ -144,10 +144,10 @@ def resultProcessin(result):
 
 
 def main():
-    # storeOntology()
-    queryText = textProcessing('leaf and fruit')
-    result = queryOntology(queryText)
-    resultProcessin(result)
+    storeOntology()
+    #queryText = textProcessing('leaf and fruit')
+    #result = queryOntology(queryText)
+    #resultProcessin(result)
 
 
 if __name__ == '__main__':

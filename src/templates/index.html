@@ -1,0 +1,139 @@
+<!-- This loads of all of files that you call below from your 'static' folder -->
+<!--The static folder consists of your bootstrap files (.css, .js, fonts, etc)-->
+<!--When you load the static folders is calls all those folders in the static files without having to code each one in individually-->
+
+<html>
+  <head>
+        <!--This is the meta information which is good for SEO-->
+  	    <meta charset="utf-8">
+  	    <!--Add keywords that describe your project between the quotation marks. This helps search engines find and index your content-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css" >
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.css" type="text/css" >
+        <title>Seman</title>
+  </head>
+  <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Seman</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">API</a></li>
+                  <li><a href="/api/ontologies">Indexes</a></li>
+                  <li><a href="#">Types</a></li>
+                  <li><a href="#">Concepts</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row" style="margin-bottom: 2%;">
+                <h2>Semantic annotator tool </h2>
+            </div>
+            <div class="row" style="text-align: center; margin-bottom: 2%;">
+                <div class="col-md-6">
+                    <div class="btn btn-info" style="font-size: large;">
+                        Annotate using trainning data
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn btn-default"  style="font-size: large;">
+                        Annotate without trainning data
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-4">
+                     <h3>Start annotation </h3>
+                </div>
+                    {% if message %}
+                <div class="col-md-8 alert alert-warning">{{message}}</div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#textannotation" >Annotate a text</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#fileannotation" role="tab" >Annotate from a text</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade  in active" id="textannotation">
+                            <p style="margin-top: 2%; margin-bottom: 2%;">Enter words you want to annotate in the text erea. If you have many words, separate the by commas</p>
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="wordstoannotate">Enter words to annotate</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" rows="5" id="wordstoannotate" placeholder="word-1, word-2, word-3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 justify-content-start" for="selectontology">Select an Ontology:</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="selectontology">
+                                            <option selected>Use all Ontologies</option>
+                                            <option value="http://purl.obolibrary.org/obo/go.owl">http://purl.obolibrary.org/obo/go.owl</option>
+                                            <option value="http://purl.obolibrary.org/obo/po.owl">http://purl.obolibrary.org/obo/po.owl</option>
+                                            <option value="http://purl.obolibrary.org/obo/agro.owl">http://purl.obolibrary.org/obo/agro.owl</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Enter Ontology here</label>
+                                    <div class="col-md-10">
+                                        <input name="newontology" value=""  class="form-control" placeholder="enter specific ontology here">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success col-md-offset-2 " value="Annotate now">
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="fileannotation">
+                            <p style="margin-top: 2%; margin-bottom: 2%">Annotate a CSV file</p>
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Select file to annotate</label>
+                                    <div class="col-md-10">
+                                        <input type="file"  id="annotatefile">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 justify-content-start" for="selectontology">Select an Ontology:</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="selectontology">
+                                            <option selected>Use all Ontologies</option>
+                                            <option value="http://purl.obolibrary.org/obo/go.owl">http://purl.obolibrary.org/obo/go.owl</option>
+                                            <option value="http://purl.obolibrary.org/obo/po.owl">http://purl.obolibrary.org/obo/po.owl</option>
+                                            <option value="http://purl.obolibrary.org/obo/agro.owl">http://purl.obolibrary.org/obo/agro.owl</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Enter Ontology here</label>
+                                    <div class="col-md-10">
+                                        <input name="newontology" value=""  class="form-control" placeholder="enter specific ontology here">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success col-lg-offset-2" value="Annotate now">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/bootstrap.js"></script>
+  </body>
+</html>
