@@ -209,8 +209,6 @@ def getQueryNoIndex():
             newOnto = request.form['newontology']
             onto.personalOntology(procewords, newOnto)
         elif request.form['indexes'] != '0' and not request.form['newontology']:
-            pass
-        else:
             # a type selected
             index = request.form['indexes']
             print(index)
