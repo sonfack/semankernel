@@ -24,16 +24,40 @@ class Ontology(object):
     def personalOntology(self, words, urlOnto):
         # parsing the ontology
         self.ontoGraph.parse(urlOnto)
+        print('personal')
+        data = {}
         for subj in self.ontoGraph.subjects(predicate=None, object=None):
             subjLabel = self.ontoGraph.label(subj, default='')
+            print(str(subjLabel))
             for word in words:
                 if ((len(subjLabel) > 0) and word in str(subjLabel)):
+                    concept = {}
                     for p, o in self.ontoGraph.predicate_objects(subject=subj):
                         predicate = p
-                        print('PREDICATE = '+predicate)
+                        print('PREDICATE = ' + predicate)
                         object = o
-                        print('OBJECT = '+object)
+                        print('OBJECT = ' + object)
+                        tabPredicate = predicate.split('#')
+                        if len(tabPredicate) == 2:
+                            if object and len(object) > 0:
+                                if Counter(tabPredicate[1]) == Counter('id'):
+                                    concept[tabPredicate[1]] = str(object)
+                                elif Counter(tabPredicate[1]) == Counter('comment'):
+                                    concept[tabPredicate[1]] = str(self.ontoGraph.comment(subject=subj, default=''))
+                                else:
+                                    tabObject = object.split('#')
+                                    if len(tabObject) == 2:
+                                        concept[tabPredicate[1]] = str(tabObject[1])
+                                    else:
+                                        concept[tabPredicate[1]] = str(object)
+                            else:
+                                concept[tabPredicate[1]] = 'None'
+                    print(concept)
+                    #    tabConcept.append(concept)
+                    data[subj] = concept
                 break
+
+        return data
 
 
     # this function takes a list of word and create and or contatenation for elasticsearch string query

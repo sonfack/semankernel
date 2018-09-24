@@ -204,7 +204,11 @@ def getQueryNoIndex():
             print('ici ')
             newOnto = request.form['newontology']
             print(newOnto)
-            onto.personalOntology(procewords, newOnto)
+            results = onto.queryOntology(procewords)
+            finalResult = resultProcessin(results)
+            yourresult = onto.personalOntology(procewords, newOnto)
+            print(yourresult)
+            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=finalResult, yourresult=yourresult)
         elif request.form['indexes'] != '0' and request.form['newontology']:
             newOnto = request.form['newontology']
             onto.personalOntology(procewords, newOnto)

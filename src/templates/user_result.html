@@ -2,30 +2,102 @@
 {% block result %}
     {% if finalResult %}
     <div class="row"><h4>Result</h4></div>
-    <div class="row table-responsive" style="font-size: 8px; ">
-        <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
-        <table class="table" style="text-align: center;">
-        <thead>
-            <tr>
-                <th style="text-align: center;">URI</th>
-                <th style="text-align: center;">Type</th>
-                <th style="text-align: center;">Lable</th>
-                <th style="text-align: center;">Synonyme</th>
-                <th style="text-align: center;">Comment</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for data in finalResult %}
-          <tr>
-              <td style="font-size: 12px;">{{data.subject}}</td>
-              <td style="font-size: 12px;">{{data.type}}</td>
-              <td style="font-size: 12px;">{{data.label}}</td>
-              <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
-              <td style="font-size: 12px;">{{data.comment}}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-        </table>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#platformresult" >Platform result</a>
+        </li>
+        {% if yourresult%}
+        <li>
+            <a data-toggle="tab" href="#yourresult" role="tab" >Your result</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#compileresult" role="tab" >Compile result</a>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade  in active" id="platformresult">
+            <div class="row table-responsive" style="font-size: 8px; ">
+                <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
+                <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">URI</th>
+                        <th style="text-align: center;">Type</th>
+                        <th style="text-align: center;">Lable</th>
+                        <th style="text-align: center;">Synonyme</th>
+                        <th style="text-align: center;">Comment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in finalResult %}
+                  <tr>
+                      <td style="font-size: 12px;">{{data.subject}}</td>
+                      <td style="font-size: 12px;">{{data.type}}</td>
+                      <td style="font-size: 12px;">{{data.label}}</td>
+                      <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
+                      <td style="font-size: 12px;">{{data.comment}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade  in active" id="yourresult">
+            <div class="row table-responsive" style="font-size: 8px; ">
+                <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
+                <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">URI</th>
+                        <th style="text-align: center;">Type</th>
+                        <th style="text-align: center;">Lable</th>
+                        <th style="text-align: center;">Synonyme</th>
+                        <th style="text-align: center;">Comment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in yourresult %}
+                  <tr>
+                      <td style="font-size: 12px;">{{data.subject}}</td>
+                      <td style="font-size: 12px;">{{data.type}}</td>
+                      <td style="font-size: 12px;">{{data.label}}</td>
+                      <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
+                      <td style="font-size: 12px;">{{data.comment}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-pane fade  in active" id="compileresult">
+            <div class="row table-responsive" style="font-size: 8px; ">
+                <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
+                <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">URI</th>
+                        <th style="text-align: center;">Type</th>
+                        <th style="text-align: center;">Lable</th>
+                        <th style="text-align: center;">Synonyme</th>
+                        <th style="text-align: center;">Comment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in yourresult %}
+                  <tr>
+                      <td style="font-size: 12px;">{{data.subject}}</td>
+                      <td style="font-size: 12px;">{{data.type}}</td>
+                      <td style="font-size: 12px;">{{data.label}}</td>
+                      <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
+                      <td style="font-size: 12px;">{{data.comment}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     {% endif %}
 {% endblock %}
