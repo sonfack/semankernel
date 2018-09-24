@@ -12,6 +12,8 @@ from werkzeug.utils import secure_filename
 
 from src.common import ontology
 
+from stemming.porter2 import stem
+
 
 #configure
 UPLOAD_FOLDER = 'data'
@@ -58,11 +60,11 @@ def textProcessing(text):
     # print(filterWords)
 
     # stemming words
-    ps = PorterStemmer()
+    # ps = PorterStemmer()
     stemWords = []
 
     for word in filterWords:
-        stemWords.append(ps.stem(word))
+        stemWords.append(stem(word))
     print(stemWords)
     return stemWords
 
@@ -88,10 +90,7 @@ def api():
 @app.route('/home')
 def home():
     onto = ontology.Ontology()
-    allindex = onto.noIndexQuery()
-    aggregations = allindex['aggregations']
-    typeAgg = aggregations['typesAgg']
-    buckets = typeAgg['buckets']
+    buckets = onto.buckets
     print(buckets)
     types = []
     for index in buckets:
@@ -206,11 +205,21 @@ def getQueryNoIndex():
             print(newOnto)
             results = onto.queryOntology(procewords)
             finalResult = resultProcessin(results)
+            #obtaind unique element
+            tmp1 = []
+            for concept in finalResult:
+                if concept not in tmp1:
+                    tmp1.append(concept)
+
             yourresult = onto.personalOntology(procewords, newOnto)
-            print('#######################################################')
             print(yourresult)
-            print('#######################################################')
-            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=finalResult, yourresult=yourresult)
+            yourresultsort = sorted(yourresult, key=lambda k: k['similarity'])
+            tmp2 = []
+            for concept in yourresultsort:
+                if concept not in tmp2:
+                    tmp2.append(concept)
+            tmp2 = sorted(tmp2, key=lambda k: k['similarity'])
+            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=tmp1, yourresult=tmp2)
         elif request.form['indexes'] != '0' and request.form['newontology']:
             newOnto = request.form['newontology']
             onto.personalOntology(procewords, newOnto)

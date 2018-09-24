@@ -6,7 +6,7 @@
         <li class="active">
             <a data-toggle="tab" href="#platformresult" >Platform result</a>
         </li>
-        {% if yourresult%}
+        {% if yourresult %}
         <li>
             <a data-toggle="tab" href="#yourresult" role="tab" >Your result</a>
         </li>
@@ -32,7 +32,7 @@
                 <tbody>
                 {% for data in finalResult %}
                   <tr>
-                      <td style="font-size: 12px;">{{data.subject}}</td>
+                      <td style="font-size: 12px;"><a href="/api/class/{{data.id}}}">{{data.subject}}</a></td>
                       <td style="font-size: 12px;">{{data.type}}</td>
                       <td style="font-size: 12px;">{{data.label}}</td>
                       <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
@@ -43,6 +43,7 @@
                 </table>
             </div>
         </div>
+        {% if yourresult %}
         <div class="tab-pane fade  in active" id="yourresult">
             <div class="row table-responsive" style="font-size: 8px; ">
                 <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
@@ -59,9 +60,9 @@
                 <tbody>
                 {% for data in yourresult %}
                   <tr>
-                      <td style="font-size: 12px;"><a href="/api/class/+{{data.subject}}">{{data.subject}}</a></td>
+                      <td style="font-size: 12px;"><a href="#">{{data.subject}}</a></td>
                       <td style="font-size: 12px;">{{data.type}}</td>
-                      <td style="font-size: 12px;">{{data.label}}</td>
+                      <td style="font-size: 12px;">{{data.label}}: Sim({{data.similarity}})</td>
                       <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
                       <td style="font-size: 12px;">{{data.comment}}</td>
                   </tr>
@@ -86,7 +87,6 @@
                 </thead>
                 <tbody>
                 {% for data in yourresult %}
-                    {{ data }}
                   <tr>
                       <td style="font-size: 12px;">{{data.subject}}</td>
                       <td style="font-size: 12px;">{{data.type}}</td>
@@ -99,6 +99,7 @@
                 </table>
             </div>
         </div>
+        {% endif %}
     </div>
     {% endif %}
 {% endblock %}

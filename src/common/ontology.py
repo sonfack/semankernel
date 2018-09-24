@@ -4,7 +4,7 @@ import rdflib
 
 from collections import Counter
 from elasticsearch import helpers
-
+from pyjarowinkler import distance
 from src.common import database
 
 
@@ -55,6 +55,7 @@ class Ontology(object):
                                 concept[tabPredicate[1]] = 'None'
                     print('--------------------')
                     concept['subject'] = str(subj)
+                    concept['similarity'] = float(distance.get_jaro_distance(subjLabel, " ".join(words), winkler=True, scaling=0.1))
                     print(concept)
                     #    tabConcept.append(concept)
                     data.append(concept)

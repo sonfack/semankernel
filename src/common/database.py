@@ -8,4 +8,4 @@ class Database(object):
         # Connect to the elastic cluster
         self.address = address
         self.port = port
-        self.es = Elasticsearch([{'host': self.address, 'port': self.port }])
+        self.es = Elasticsearch([{'host': self.address, 'port': self.port}])
