@@ -25,7 +25,8 @@ class Ontology(object):
         # parsing the ontology
         self.ontoGraph.parse(urlOnto)
         print('personal')
-        data = {}
+        data = []
+        count = 0
         for subj in self.ontoGraph.subjects(predicate=None, object=None):
             subjLabel = self.ontoGraph.label(subj, default='')
             print(str(subjLabel))
@@ -52,9 +53,12 @@ class Ontology(object):
                                         concept[tabPredicate[1]] = str(object)
                             else:
                                 concept[tabPredicate[1]] = 'None'
+                    print('--------------------')
+                    concept['subject'] = str(subj)
                     print(concept)
                     #    tabConcept.append(concept)
-                    data[subj] = concept
+                    data.append(concept)
+                    print('--------------------')
                 break
 
         return data

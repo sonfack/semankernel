@@ -207,7 +207,9 @@ def getQueryNoIndex():
             results = onto.queryOntology(procewords)
             finalResult = resultProcessin(results)
             yourresult = onto.personalOntology(procewords, newOnto)
+            print('#######################################################')
             print(yourresult)
+            print('#######################################################')
             return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=finalResult, yourresult=yourresult)
         elif request.form['indexes'] != '0' and request.form['newontology']:
             newOnto = request.form['newontology']
@@ -231,6 +233,13 @@ def getQueryNoIndex():
 
 
 # case 4 an index selected  and a type selected
+
+
+# get a class
+@app.route('/api/class/<string:classuri>', methods=['GET','POST'])
+def getClass():
+    pass
+
 
 
 if __name__ == '__main__':

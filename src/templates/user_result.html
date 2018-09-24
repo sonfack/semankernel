@@ -59,7 +59,7 @@
                 <tbody>
                 {% for data in yourresult %}
                   <tr>
-                      <td style="font-size: 12px;">{{data.subject}}</td>
+                      <td style="font-size: 12px;"><a href="/api/class/+{{data.subject}}">{{data.subject}}</a></td>
                       <td style="font-size: 12px;">{{data.type}}</td>
                       <td style="font-size: 12px;">{{data.label}}</td>
                       <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
@@ -86,6 +86,7 @@
                 </thead>
                 <tbody>
                 {% for data in yourresult %}
+                    {{ data }}
                   <tr>
                       <td style="font-size: 12px;">{{data.subject}}</td>
                       <td style="font-size: 12px;">{{data.type}}</td>
