@@ -1,18 +1,21 @@
 import os
 import re
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 # NLTK Stop words
 from nltk.corpus import stopwords
 # NLTK tokenize
 from nltk.tokenize import word_tokenize
 # NLTK stemming
 from nltk.stem import PorterStemmer
+from rdflib import URIRef, Graph, RDF
 
 from werkzeug.utils import secure_filename
 
 from src.common import ontology
 
 from stemming.porter2 import stem
+
+from pyjarowinkler import distance
 
 
 #configure
@@ -73,54 +76,117 @@ def allowed_file(filename):
  return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 @app.route('/help')
 @app.route('/')
 def api():
     return """ 
                 <p><b>/api</b> : for help</p>
                 <p><b>/api/indexes</b> : to get out all indexes available in the database</p>
-                <p><b>/api/index/indexName</b> : to get all types of the given index <i>ex : ontology</i></p>
-                <p><b>/api/index/indexName/typeName</b> : to get all the documents of the given type<i>ex : po for plant ontology</i></p>
-                <p>/<b>api/index/indexName/typeName/id</b> : to get the value of the docuement referenced by the id
+                <p><b>/api/index/indexName/</b> : to get all the documents of the given index<i>ex : po for plant ontology</i></p>
+                <p><b>/api/index/indexName/size</b> : to get size(integer) the documents of the given index<i>ex : po for plant ontology</i></p>
+                <p><b>/api/index/indexName/begin/size</b> : to get size(integer) the documents of the given index from a setting begin(integer)<i>ex : po for plant ontology</i></p
+                <p>/<b>api/document/indexName/id</b> : to get the value of the docuement referenced by the id
                 <i>ex : 2  ; a document is a concept in the given typeName(ontology)</i></p>
                 <hr>
                 <p><a href='/home'>Go to home</a></p>
             """
+
+
+# print out all ontologies in the databasea
+@app.route('/api/indexes', methods=['GET'])
+def ontologies():
+    onto = ontology.Ontology()
+    allindex = onto.noIndexQuery()
+    if allindex:
+        print(onto.buckets)
+        return jsonify({"ontologies":onto.buckets})
+    else:
+        message = 'Problem on your request'
+        return jsonify({'message': message})
+
+
+@app.route('/api/document/<string:indexName>/<int:id>', methods=['GET'])
+def getDocumentByIndexAndId(indexName,id):
+    onto = ontology.Ontology()
+    result = onto.getDocumentById(indexName, id)
+    return jsonify({'document':result})
+
+# print out a concept of a given ontologyName
+@app.route('/api/document/<string:indexName>', methods=['GET'])
+def getAllDocument(indexName):
+    onto = ontology.Ontology()
+    result = onto.getAllConceptsOfOntology(indexName)
+    print(result)
+    return jsonify({'ontology':result})
+
+
+# print out a concept of a given ontologyName
+@app.route('/api/index/<string:indexName>', methods=['GET'])
+def getAllDocumentOfIndex(indexName):
+    onto = ontology.Ontology()
+    result = onto.getAllConceptsOfOntology(indexName)
+    print(result)
+    return jsonify({'ontology':result})
+
+
+# print out a concept of a given ontologyName
+@app.route('/api/index/<string:indexName>/<int:size>', methods=['GET'])
+def getFixedSizeOfDocument(indexName, size):
+    onto = ontology.Ontology()
+    result = onto.getAllConceptsOfOntology(indexName, size=size)
+    print(result)
+    return jsonify({'ontology':result})
+
+# print out a concept of a given ontologyName
+@app.route('/api/index/<string:indexName>/<int:begin>/<int:size>', methods=['GET'])
+def getFixedSizeOfDocumentFromBegining(indexName, begin, size):
+    onto = ontology.Ontology()
+    result = onto.getAllConceptsOfOntology(indexName, begin=begin, size=size)
+    print(result)
+    return jsonify({'ontology':result})
+
+
+
+
+# print out the list of all the concepts of a given ontologyName
+@app.route('/getTypes')
+def getTypes():
+    pass
+
+
+
 # welcome page
 @app.route('/home')
 def home():
     onto = ontology.Ontology()
     buckets = onto.buckets
     print(buckets)
-    types = []
-    for index in buckets:
-        indexVal = index['key']
-        alltype = onto.indexQuery(indexVal)
-        aggType = alltype['aggregations']
-        typeAggType = aggType['typesAgg']
-        print(typeAggType['buckets'])
-        types.append(typeAggType['buckets'])
-
+    types = onto.types
     print(types)
 
-    return render_template('user_stat.html', buckets=buckets, types=types)
+    return render_template('user_stat.html', buckets=buckets)
 
 # admin page
 @app.route('/administrator')
 def admin():
-    return render_template('admin.html')
+    onto = ontology.Ontology()
+    buckets = onto.buckets
+    return render_template('admin_stat.html', buckets=buckets)
 
 @app.route('/administrator/ontology', methods=['POST'])
 def saveOntology():
+    onto = ontology.Ontology()
+    buckets = onto.buckets
     if request.method == 'POST':
         if 'ontologyFile' not in request.files:
             message = 'No file to upload'
-            return render_template('admin.html', message=message)
+            return render_template('admin_stat.html', message=message, buckets=buckets)
         else:
             file = request.files['ontologyFile']
             if file.filename == '':
                 message = 'No selected file'
-                return render_template('admin.html', message=message)
+                return render_template('admin_stat.html', message=message, buckets=buckets)
             else:
                 if file and allowed_file(file.filename):
                     onto = ontology.Ontology()
@@ -135,13 +201,13 @@ def saveOntology():
 
                     else:
                         message = 'Something went wrong while save ontology in database'
-                        return render_template('admin.html', message=message)
+                        return render_template('admin_stat.html', message=message, buckets=buckets)
     else:
         redirect(url_for('home'))
 
-# print out all ontologies in the databasea
-@app.route('/api/indexes', methods=['GET'])
-def ontologies():
+
+@app.route('/api/getindexes', methods=['GET'])
+def getontologies():
     onto = ontology.Ontology()
     allindex = onto.noIndexQuery()
     if allindex:
@@ -154,6 +220,40 @@ def ontologies():
         return message
 
 
+@app.route('/getIdUri', methods=['POST'])
+def getIdUri():
+    onto = ontology.Ontology()
+    if request.method == 'POST':
+        conceptid = request.form['id']
+        index = request.form['indexes']
+        if conceptid and index:
+            if index != '0':
+                results = onto.getConceptById(conceptid, indexValue=index)
+                finalResult = resultProcessin(results)
+                tmp1 = []
+                mylist = []
+                for concept in finalResult:
+                    if concept.get('id') not in mylist and concept.get('id') == conceptid:
+                        mylist.append(concept.get('id'))
+                    elif concept.get('id') not in mylist:
+                        tmp1.append(concept)
+                        break
+                del mylist
+                return render_template('user_result.html', buckets=onto.buckets,finalResult=tmp1)
+            else:
+                results = onto.getConceptById(conceptid, indexValue=None)
+                finalResult = resultProcessin(results)
+                tmp1 = []
+                mylist = []
+                for concept in finalResult:
+                    if concept.get('id') not in mylist and concept.get('id') != conceptid:
+                        mylist.append(concept.get('id'))
+                    elif concept.get('id') not in mylist:
+                        tmp1.append(concept)
+                        break
+                del mylist
+                return render_template('user_result.html', buckets=onto.buckets, finalResult=tmp1)
+
 @app.route('/getIndexes', methods=['GET'])
 def getIndexes():
     onto = ontology.Ontology()
@@ -165,75 +265,134 @@ def getIndexes():
         return render_template('index.html', message=message)
 
 
-# print out the list of all the concepts of a given ontologyName
-@app.route('/api/index/<string:indexName>/<string:typeName>', methods=['POST'])
-def concepts():
-    onto = ontology.Ontology()
-
-    return render_template('user_stat.html', buckets=onto.buckets)
-
-
-# print out the list of all the concepts of a given ontologyName
-@app.route('/getTypes')
-def getTypes():
-    pass
-
-
-# print out a concept of a given ontologyName given the concept's id
-@app.route('/api/index/<string:index>/<string:typeName>/<int:concetpId>')
-def concept():
-    onto = ontology.Ontology()
-    return render_template('user_stat.html', buckets=onto.buckets)
-
 # case 1 not index selected
-@app.route('/getQueryNoIndex', methods=['POST'])
-def getQueryNoIndex():
+@app.route('/match', methods=['POST'])
+def getMatchFromDatabaseOrLink():
     onto = ontology.Ontology()
     print('get query no index ')
     if request.method == 'POST':
         words = request.form['words']
         print(words)
         procewords = textProcessing(words)
-        # no type selected
+        # no type selected and not link given
         if request.form['indexes'] == '0' and not request.form['newontology']:
             results = onto.queryOntology(procewords)
             finalResult = resultProcessin(results)
-            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=finalResult)
+            tmp1 = []
+            mylist = []
+            for concept in finalResult:
+                if concept.get('subject') not in mylist:
+                    conceptLabel = concept.get('label')
+                    words = str(" ".join(words))
+                    concept.update({'similarity': float(
+                        distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                    print(concept)
+                    tmp1.append(concept)
+                    mylist.append(concept.get('subject'))
+            del mylist
+            tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
+            return render_template('user_result.html', buckets=onto.buckets,  words=words, finalResult=tmp1)
         elif request.form['indexes'] == '0' and request.form['newontology']:
-            print('ici ')
             newOnto = request.form['newontology']
             print(newOnto)
             results = onto.queryOntology(procewords)
             finalResult = resultProcessin(results)
-            #obtaind unique element
-            tmp1 = []
-            for concept in finalResult:
-                if concept not in tmp1:
-                    tmp1.append(concept)
-
+            print(finalResult)
             yourresult = onto.personalOntology(procewords, newOnto)
             print(yourresult)
-            yourresultsort = sorted(yourresult, key=lambda k: k['similarity'])
+            print('------------------------------ fin your result ----------------------------------')
+            tmp1 = []
+            mylist = []
+            for concept in finalResult:
+                if concept.get('subject') not in mylist:
+                    conceptLabel = concept.get('label')
+                    words = str(" ".join(words))
+                    concept.update({'similarity': float(distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                    print(concept)
+                    tmp1.append(concept)
+                    mylist.append(concept.get('subject'))
+            del mylist
+            tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
+            print(tmp1)
             tmp2 = []
-            for concept in yourresultsort:
-                if concept not in tmp2:
+            mylist = []
+            for concept in yourresult:
+                if concept.get('subject') not in mylist:
                     tmp2.append(concept)
-            tmp2 = sorted(tmp2, key=lambda k: k['similarity'])
-            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=tmp1, yourresult=tmp2)
-        elif request.form['indexes'] != '0' and request.form['newontology']:
-            newOnto = request.form['newontology']
-            onto.personalOntology(procewords, newOnto)
-        elif request.form['indexes'] != '0' and not request.form['newontology']:
-            # a type selected
+                    mylist.append(concept.get('subject'))
+            tmp2 = sorted(tmp2, key=lambda k: k['similarity'], reverse=True)
+            print(tmp2)
+            tmp = []
+            for concept in tmp1:
+                tmp.append(concept)
+
+            for concept in tmp2:
+                tmp.append(concept)
+
+            tmp = sorted(tmp, key=lambda k: k['similarity'], reverse=True)
+            print('-------------------------- tmp ---------------------------')
+            print(tmp)
+            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=tmp1, yourresult=tmp2, combine=tmp)
+        elif request.form['indexes']!= '0' and not request.form['newontology']:
+            print('ontology selected &&  no other ontology')
             index = request.form['indexes']
             print(index)
-            results = onto.queryOntology(procewords, indexValue=str(index))
+            print('words')
+            print(procewords)
+            results = onto.queryOntology(procewords, typeValue=None, indexValue=index)
             finalResult = resultProcessin(results)
-            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=finalResult)
+            tmp1 = []
+            mylist = []
+            for concept in finalResult:
+                if concept.get('subject') not in mylist:
+                    conceptLabel = concept.get('label')
+                    words = str(" ".join(words))
+                    concept.update({'similarity': float(
+                        distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                    print(concept)
+                    tmp1.append(concept)
+                    mylist.append(concept.get('subject'))
+            del mylist
+            tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
+            print(tmp1)
 
-    else:
-        return render_template('erro.html')
+            return render_template('user_result.html', buckets=onto.buckets, types=onto.types, words=words, finalResult=tmp1)
+        elif request.form['indexes']!= '0' and request.form['newontology']:
+            index = request.form['indexes']
+            newOnto = request.form['newontology']
+            yourresult = onto.personalOntology(procewords, newOnto)
+            tmp2 = []
+            mylist = []
+            for concept in yourresult:
+                if concept.get('subject') not in mylist:
+                    tmp2.append(concept)
+                    mylist.append(concept.get('subject'))
+            tmp2 = sorted(tmp2, key=lambda k: k['similarity'], reverse=True)
 
+            results = onto.queryOntology(procewords, typeValue=None, indexValue=index)
+            finalResult = resultProcessin(results)
+            tmp1 = []
+            mylist = []
+            for concept in finalResult:
+                if concept.get('subject') not in mylist:
+                    conceptLabel = concept.get('label')
+                    words = str(" ".join(words))
+                    concept.update({'similarity': float(
+                        distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                    print(concept)
+                    tmp1.append(concept)
+                    mylist.append(concept.get('subject'))
+            del mylist
+            tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
+            tmp = []
+            for concept in tmp1:
+                tmp.append(concept)
+
+            for concept in tmp2:
+                tmp.append(concept)
+
+            tmp = sorted(tmp, key=lambda k: k['similarity'], reverse=True)
+            return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=tmp1, yourresult=tmp2, combine=tmp)
 
 # case 2 an index selected
 
@@ -248,6 +407,64 @@ def getQueryNoIndex():
 @app.route('/api/class/<string:classuri>', methods=['GET','POST'])
 def getClass():
     pass
+
+@app.route('/manualannotation', methods=['GET', 'POST'])
+def manualAnnotation():
+    print('annotatin')
+    onto = ontology.Ontology()
+    if request.method == 'POST':
+        print('annotatin1')
+        if request.form['uri'] and request.form['value']:
+            print('annotatin2')
+            uriValue = request.form['uri']
+            valueObj = request.form['value']
+            uri = URIRef(uriValue)
+            g = Graph()
+            g.parse(uri)
+            print('annotation3')
+            listResult = []
+            listProperty = []
+            for subj, pred, obj in g:
+                print(subj)
+                if subj == uri and valueObj in obj:
+                    print(subj, '---', pred, '---', obj)
+                    listResult.append({'uri':subj, 'predicate':pred, 'object':obj})
+                    uriPred = URIRef(pred)
+                    gPred = Graph()
+                    gPred.parse(uriPred)
+                    for objPred in gPred.objects(subject=uriPred, predicate=RDF.type):
+                        print('---Type', objPred)
+                        listProperty.append(objPred)
+            if len(listResult) > 0:
+                print('annotatin4')
+                return render_template('user_result_annotation.html', buckets=onto.buckets, words=valueObj, finalResult=listResult)
+            elif request.form['indexes'] == '0' and not request.form['newontology']:
+                print('annotatin5')
+                words = request.form['value']
+                procewords = textProcessing(words)
+                results = onto.queryOntology(procewords)
+                if results is None:
+                    exit()
+                else:
+                    finalResult = resultProcessin(results)
+                    tmp1 = []
+                    mylist = []
+                    for concept in finalResult:
+                        if concept.get('subject') not in mylist:
+                            conceptLabel = concept.get('label')
+                            words = str(" ".join(words))
+                            concept.update({'similarity': float(
+                                distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                            print(concept)
+                            tmp1.append(concept)
+                            mylist.append(concept.get('subject'))
+                    del mylist
+                    tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
+                    print('annotation5')
+                    return render_template('user_result_annotation.html', buckets=onto.buckets, words=words, uri=uriValue, yourresult=tmp1)
+    else:
+        message = 'No data entered'
+        return render_template('user_stat.html', buckets=onto.buckets, message=message)
 
 
 

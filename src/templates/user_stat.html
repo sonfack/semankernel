@@ -1,7 +1,7 @@
 {% extends "home.html" %}
 {% block stat %}
     {% if buckets %}
-        <div class="row table-responsive">
+        <div class="row table-responsive" style="box-shadow: 2px 2px 2px grey;">
           <h4 style="text-align: center;">Indexes</h4>
           <table class="table" style="text-align: center;">
             <thead>
@@ -21,26 +21,5 @@
           </table>
         </div>
     {% endif %}
-      <hr>
-    {% if types %}
-        <div class="row table-responsive">
-          <h4 style="text-align: center;">Types</h4>
-          <table class="table" style="text-align: center;">
-            <thead >
-              <tr>
-                <th style="text-align: center;" >No</th>
-                <th style="text-align: center;">Type name</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for data in types %}
-              <tr>
-                  <td>{{loop.index}}</td>
-                  <td>{{data[0].key}}</td>
-              </tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </div>
-    {% endif %}
+
 {% endblock %}

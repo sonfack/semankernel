@@ -1,0 +1,109 @@
+{% extends "user_stat.html" %}
+{% block result %}
+
+    <div class="row"><h4>Result</h4></div>
+    <ul class="nav nav-tabs">
+         {% if finalResult %}
+        <li class="active">
+            <a data-toggle="tab" href="#platformresult" >Platform result</a>
+        </li>
+         {% endif %}
+        {% if yourresult  %}
+        <li>
+            <a data-toggle="tab" href="#yourresult" role="tab" >Your result</a>
+        </li>
+        {%  endif %}
+        {% if combine %}
+        <li>
+            <a data-toggle="tab" href="#compileresult" role="tab" >Compile result</a>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="tab-content">
+        {% if finalResult %}
+        <div class="tab-pane fade  in active" id="platformresult">
+            <div class="row table-responsive" style="font-size: 8px; ">
+                <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
+                <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">URI</th>
+                        <th style="text-align: center;">Propaty</th>
+                        <th style="text-align: center;">Object</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in finalResult %}
+                  <tr>
+                      <td style="font-size: 12px;"><a href="/api/class/{{data.uri}}}">{{data.uri}}</a></td>
+                      <td style="font-size: 12px;">{{data.predicate}}</td>
+                      <td style="font-size: 12px;">{{data.object}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+        {% if yourresult %}
+        <div class="tab-pane fade  in active" id="yourresult">
+            <div class="row table-responsive" style="font-size: 8px; ">
+                <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
+                <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">URI</th>
+                        <th style="text-align: center;">Property</th>
+                        <th style="text-align: center;">Value URI</th>
+                        <th style="text-align: center;">Value Label</th>
+                        <th style="" >Annotate now</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in yourresult %}
+                  <tr>
+                      <td style="font-size: 12px;"><a href="#">{{uri}}</a></td>
+                      <td style="font-size: 12px;"><input type="text" value="" name="property"> </td>
+                      <td style="font-size: 12px;"><a href="#">{{data.subject}}</a></td>
+                      <td style="font-size: 12px;">{{data.label}} similiarity: {{data.similarity}}</td>
+                      <td style=""><button type="submit">Annotate now</button> </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if combine %}
+        <div class="tab-pane fade  in active" id="compileresult">
+            <div class="row table-responsive" style="font-size: 8px; ">
+                <h4 style="text-align: center;">Elements relative to : {{words}}</h4>
+                <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">URI</th>
+                        <th style="text-align: center;">Type</th>
+                        <th style="text-align: center;">Lable</th>
+                        <th style="text-align: center;">Synonyme</th>
+                        <th style="text-align: center;">Comment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in combine %}
+                  <tr>
+                      <td style="font-size: 12px;">{{data.subject}}</td>
+                      <td style="font-size: 12px;">{{data.type}}</td>
+                      <td style="font-size: 12px;">{{data.label}}: Sim({{data.similarity}})</td>
+                      <td style="font-size: 12px;">{{data.hasRelatedSynonym}}</td>
+                      <td style="font-size: 12px;">{{data.comment}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

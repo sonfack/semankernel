@@ -11,15 +11,55 @@ from src.common import database
 class Ontology(object):
 
     def __init__(self):
+        self.buckets = {
 
+        }
+        self.types = []
         self.ontoGraph = rdflib.Graph()
 
         allindex = self.noIndexQuery()
-        if allindex:
+        total = allindex['_shards']
+        print(total['total'])
+
+        if total['total'] > 0:
             aggregations = allindex['aggregations']
             typeAgg = aggregations['typesAgg']
             buckets = typeAgg['buckets']
             self.buckets = buckets
+            #self.types = []
+            for index in self.buckets:
+                indexVal = index['key']
+                alltype = self.indexQuery(indexVal)
+                aggType = alltype['aggregations']
+                typeAggType = aggType['typesAgg']
+
+                self.types.append(typeAggType['buckets'])
+
+
+    def getDocumentById(self, indexName, id):
+        # Connect to the elastic cluster
+        storage = database.Database()
+        es = storage.es
+        res = es.search(index=indexName, body={
+                                  "query": {
+                                    "term": {
+                                      "_id": id
+                                    }
+                                  }
+                                }
+                        )
+        return res
+
+
+    def getTypeOfIndex(self, index):
+        for index in self.buckets:
+            indexVal = index['key']
+            if indexVal == index:
+                alltype = self.indexQuery(indexVal)
+                aggType = alltype['aggregations']
+                typeAggType = aggType['typesAgg']
+                return  typeAggType['buckets']
+
 
     def personalOntology(self, words, urlOnto):
         # parsing the ontology
@@ -30,8 +70,9 @@ class Ontology(object):
         for subj in self.ontoGraph.subjects(predicate=None, object=None):
             subjLabel = self.ontoGraph.label(subj, default='')
             print(str(subjLabel))
+            persList = []
             for word in words:
-                if ((len(subjLabel) > 0) and word in str(subjLabel)):
+                if ((len(subjLabel) > 0) and word in str(subjLabel)) and str(subj) not in persList:
                     concept = {}
                     for p, o in self.ontoGraph.predicate_objects(subject=subj):
                         predicate = p
@@ -53,14 +94,14 @@ class Ontology(object):
                                         concept[tabPredicate[1]] = str(object)
                             else:
                                 concept[tabPredicate[1]] = 'None'
-                    print('--------------------')
+                    print('-------   -------------')
                     concept['subject'] = str(subj)
                     concept['similarity'] = float(distance.get_jaro_distance(subjLabel, " ".join(words), winkler=True, scaling=0.1))
                     print(concept)
                     #    tabConcept.append(concept)
                     data.append(concept)
                     print('--------------------')
-                break
+                    persList.append(str(subj))
 
         return data
 
@@ -132,6 +173,7 @@ class Ontology(object):
                                     concept[tabPredicate[1]] = ''
 
                         concept["subject"] = subj
+
                         print(concept)
                         action = {
                             "_index": str(index),
@@ -169,7 +211,7 @@ class Ontology(object):
                                         "typesAgg": {
                                             "terms": {
                                                 "field": "_index",
-                                                "size": 200
+                                                "size": 20
                                             }
                                         }
                                     },
@@ -179,24 +221,71 @@ class Ontology(object):
         return res
 
 
-    def indexQuery(self, indexValue='ontology'):
+    def indexQuery(self, indexValue=None):
+        # Connect to the elastic cluster
+        if not indexValue is None:
+            storage = database.Database()
+            es = storage.es
+            res = es.search(index=indexValue, body=
+                                                    {
+                                                        "aggs": {
+                                                            "typesAgg": {
+                                                                "terms": {
+                                                                    "field": "_type",
+                                                                    "size": 20
+                                                                }
+                                                            }
+                                                        },
+                                                        "size": 0
+                                                    }, request_timeout=300
+                        )
+            return res
+        else:
+            return None
+
+
+    def getConceptById(self, id, indexValue=None):
         # Connect to the elastic cluster
         storage = database.Database()
         es = storage.es
-        res = es.search(index=indexValue, body=
-                                                {
-                                                    "aggs": {
-                                                        "typesAgg": {
-                                                            "terms": {
-                                                                "field": "_type",
-                                                                "size": 200
+        if id:
+            if not indexValue is None:
+                res = es.search(index=indexValue, body=
+                                                        {
+                                                            "query": {
+                                                                "bool": {
+                                                                    "must": [
+                                                                        {
+                                                                            "match": {
+                                                                                "id": id
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+
                                                             }
+                                                        }, request_timeout=300
+                            )
+                return res
+            else:
+                res = es.search(body=
+                                    {
+                                        "query": {
+                                            "bool": {
+                                                "must": [
+                                                    {
+                                                        "match": {
+                                                            "id": id
                                                         }
-                                                    },
-                                                    "size": 0
-                                                }, request_timeout=300
-                    )
-        return res
+                                                    }
+                                                ]
+                                            }
+
+                                        }
+                                    }, request_timeout=300
+                            )
+                return res
+
 
 
     def queryOntology(self, listWords, typeValue=None, indexValue=None):
@@ -207,11 +296,12 @@ class Ontology(object):
         if isinstance(listWords, list) and len(listWords) > 0:
             ourQuery = self.createOrStringQuery(listWords)
             if not typeValue is None and not indexValue is None:
+                print('not type None and not index None')
                 res = es.search(index=indexValue, doc_type=typeValue, body=
                                                                             {
                                                                                 "query": {
                                                                                     "query_string": {
-                                                                                        "fields": ["label", "*Synonym", "*Namespace, comment"],
+                                                                                        "fields": ["label", "*Synonym", "*Namespace", "comment"],
                                                                                         "query": ourQuery
                                                                                     }
                                                                                 }
@@ -219,11 +309,14 @@ class Ontology(object):
                                 )
                 return res
             elif typeValue is None and not indexValue is None:
+                print('type None and not index None')
+                print(indexValue)
+                print(ourQuery)
                 res = es.search(index=indexValue, body=
                                                         {
                                                             "query": {
                                                                 "query_string": {
-                                                                    "fields": ["label", "*Synonym", "*Namespace, comment"],
+                                                                    "fields": ["label", "*Synonym", "*Namespace", "comment"],
                                                                     "query": ourQuery
                                                                 }
                                                             },
@@ -231,13 +324,16 @@ class Ontology(object):
                                                                 {"_score": {"order": "desc"}}
                                                         }, request_timeout=300
                             )
+                print('result query')
+                print(res)
                 return res
             elif typeValue is None and indexValue is None:
+                print('not type None and  index None')
                 res = es.search(body=
-                                    {   "size":  1000,
+                                    {   "size":  50,
                                         "query": {
                                             "query_string": {
-                                                "fields": ["label", "*Synonym", "*Namespace, comment"],
+                                                "fields": ["label", "*Synonym", "*Namespace", "comment"],
                                                 "query": ourQuery
                                             }
                                         },
@@ -248,5 +344,31 @@ class Ontology(object):
                 return res
 
 
-        else:
-            return False
+
+    def getAllConceptsOfOntology(self, indexName, begin=None, size=None):
+        # Connect to the elastic cluster
+        storage = database.Database()
+        es = storage.es
+        if not size is None:
+            if begin is None:
+                begin = 0
+            res = es.search(index=indexName, body={
+                                                    "from": begin, "size": size,
+                                                    "query": {
+                                                        "match_all": {}
+                                                    }
+                                                }
+                         )
+            return res
+        elif size is None:
+            size = 100
+            if begin is None:
+                begin = 0
+            res = es.search(index=indexName, body={
+                                                        "from": begin, "size":size,
+                                                        "query": {
+                                                            "match_all": {}
+                                                        }
+                                                    }
+                            )
+            return res

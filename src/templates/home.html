@@ -15,7 +15,13 @@
                 <div class="row">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a data-toggle="tab" href="#textannotation" >Annotate a text</a>
+                            <a data-toggle="tab" href="#textmatching" >Concept matching</a>
+                        </li>
+                         <li>
+                            <a data-toggle="tab" href="#getiduri" role="tab" >Get ID URI</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#simpleannotation" role="tab" >Simple annotation</a>
                         </li>
                         <li>
                             <a data-toggle="tab" href="#fileannotation" role="tab" >Annotate from a text</a>
@@ -23,9 +29,9 @@
 
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade  in active" id="textannotation">
+                        <div class="tab-pane fade  in active" id="textmatching">
                             <p style="margin-top: 2%; margin-bottom: 2%;">Enter words you want to annotate in the text erea. If you have many words, separate the by commas</p>
-                            <form class="form-horizontal" method="post" action="/getQueryNoIndex">
+                            <form class="form-horizontal" method="post" action="/match">
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="wordstoannotate">Enter words to annotate</label>
                                     <div class="col-md-10">
@@ -57,7 +63,80 @@
 
                             </form>
                         </div>
+                        <div class="tab-pane fade" id="getiduri">
+                            <p style="margin-top: 2%; margin-bottom: 2%">Get URI of an ID</p>
+                            <form class="form-horizontal" method="post" action="/getIdUri">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="conceptid">Enter the concept ID</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control"  name="id" id="conceptid" placeholder="ID">
+                                    </div>
+                                </div>
+                                {% if buckets %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 justify-content-start" for="selectontology">Select an Ontology:</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="selectontology" name="indexes">
+                                            <option value="0" selected>Use all Ontologies</option>
+                                            {% for type in buckets %}
+                                            <option   value="{{type.key}}">{{type.key}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Enter Ontology here</label>
+                                    <div class="col-md-10">
+                                        <input name="newontology" value=""  class="form-control" placeholder="enter specific ontology here">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success col-md-offset-2 " value="Get ID">
+                                </div>
 
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="simpleannotation">
+                            <p style="margin-top: 2%; margin-bottom: 2%">Simple annotation</p>
+                            <form class="form-horizontal" method="post" action="/manualannotation">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="datauri">Data URI</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control"  name="uri" id="datauri" placeholder="Enter URI">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="valuetocorres">Value to correspond with</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control"  name="value" id="valuetocorres" placeholder="Enter value">
+                                    </div>
+                                </div>
+                                {% if buckets %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 justify-content-start" for="selectontology">Ontology to use if no direct match:</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="selectontology" name="indexes">
+                                            <option value="0" selected>Use all Ontologies</option>
+                                            {% for type in buckets %}
+                                            <option   value="{{type.key}}">{{type.key}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Enter Ontology here</label>
+                                    <div class="col-md-10">
+                                        <input name="newontology" value=""  class="form-control" placeholder="enter specific ontology here">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success col-md-offset-2 " value="Start annotation">
+                                </div>
+
+                            </form>
+                        </div>
                         <div class="tab-pane fade" id="fileannotation">
                             <p style="margin-top: 2%; margin-bottom: 2%">Annotate a CSV file</p>
                             <form class="form-horizontal">

@@ -9,6 +9,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 # NLTK stemming
 from nltk.stem import PorterStemmer
+from rdflib import Graph, RDF, URIRef
 
 
 def storeOntology():
@@ -143,8 +144,44 @@ def resultProcessin(result):
         print("Aucun resultat")
 
 
+def annotation():
+    uri = URIRef('http://dbpedia.org/resource/Richard_Nixon')
+    person = URIRef('http://dbpedia.org/ontology/Person')
+    g = Graph()
+    g.parse(uri)
+    print('annotation')
+
+
+    for obj in g.objects(subject=uri, predicate=RDF.type):
+        print(uri, "is a", obj)
+
+
+    print('-------------------------------------------------------------------------------')
+
+    for subj, pred, obj in g:
+        if subj == uri and '1946-01-01' in obj:
+            print(subj,'---', pred,'---', obj)
+            uriPred = URIRef(pred)
+            gPred = Graph()
+            gPred.parse(uriPred)
+            for objPred in gPred.objects(subject=uriPred, predicate=RDF.type):
+                print('---Type', objPred)
+
+    print('-------------------------------------------------------------------------------')
+
+    for p, o in g.predicate_objects(subject=uri):
+        predicate = p
+        print('PREDICATE = ' + p)
+        object = o
+        print('OBJECT = ' + o)
+
+
+
+
+
 def main():
-    storeOntology()
+    annotation()
+    #storeOntology()
     #queryText = textProcessing('leaf and fruit')
     #result = queryOntology(queryText)
     #resultProcessin(result)
