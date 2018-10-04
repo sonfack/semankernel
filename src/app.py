@@ -1,5 +1,6 @@
 import os
 import re
+
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 # NLTK Stop words
 from nltk.corpus import stopwords
@@ -28,7 +29,24 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-
+def levenshtein_distance(a, b):
+    """Return the Levenshtein edit distance between two strings *a* and *b*."""
+    if a == b:
+        return 0
+    if len(a) < len(b):
+        a, b = b, a
+    if not a:
+        return len(b)
+    previous_row = range(len(b) + 1)
+    for i, column1 in enumerate(a):
+        current_row = [i + 1]
+        for j, column2 in enumerate(b):
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1
+            substitutions = previous_row[j] + (column1 != column2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+    return previous_row[-1]
 
 def resultProcessin(result):
     hits = result.get('hits')
@@ -203,7 +221,7 @@ def saveOntology():
                         message = 'Something went wrong while save ontology in database'
                         return render_template('admin_stat.html', message=message, buckets=buckets)
     else:
-        redirect(url_for('home'))
+        return redirect(url_for('administrator',buckets=buckets))
 
 
 @app.route('/api/getindexes', methods=['GET'])
@@ -232,27 +250,42 @@ def getIdUri():
                 finalResult = resultProcessin(results)
                 tmp1 = []
                 mylist = []
-                for concept in finalResult:
-                    if concept.get('id') not in mylist and concept.get('id') == conceptid:
-                        mylist.append(concept.get('id'))
-                    elif concept.get('id') not in mylist:
-                        tmp1.append(concept)
-                        break
-                del mylist
-                return render_template('user_result.html', buckets=onto.buckets,finalResult=tmp1)
+                if not isinstance(finalResult, bool):
+                    for concept in finalResult:
+                        if str(concept.get('id')) == str(conceptid) and len(str(concept.get('id'))) == len(str(conceptid)):
+                            tmp1.append(concept)
+                            break
+                        elif concept.get('id') not in mylist :
+                            mylist.append(concept.get('id'))
+                    del mylist
+                    if len(tmp1) > 0 and tmp1:
+                        return render_template('user_result.html', buckets=onto.buckets,finalResult=tmp1)
+                    elif not tmp1 or len(tmp1) == 0:
+                        message = 'No result available'
+                        return render_template('user_stat.html', message=message)
+                else:
+                    message = 'No result for query ' + conceptid
+                    return render_template('user_stat.html', message=message, buckets=onto.buckets)
             else:
                 results = onto.getConceptById(conceptid, indexValue=None)
                 finalResult = resultProcessin(results)
                 tmp1 = []
                 mylist = []
-                for concept in finalResult:
-                    if concept.get('id') not in mylist and concept.get('id') != conceptid:
-                        mylist.append(concept.get('id'))
-                    elif concept.get('id') not in mylist:
-                        tmp1.append(concept)
-                        break
-                del mylist
-                return render_template('user_result.html', buckets=onto.buckets, finalResult=tmp1)
+                if not isinstance(finalResult, bool):
+                    for concept in finalResult:
+                        if concept.get('id') not in mylist and concept.get('id') != conceptid:
+                            mylist.append(concept.get('id'))
+                        elif concept.get('id') not in mylist:
+                            tmp1.append(concept)
+                            break
+                    del mylist
+                    return render_template('user_result.html', buckets=onto.buckets, finalResult=tmp1)
+                else:
+                    message = 'No result for query '+ conceptid
+                    return render_template('user_stat.html', message=message, buckets=onto.buckets)
+    else:
+        message = 'Request should be POST'
+        return render_template('user_stat.html', message=message, buckets=onto.buckets)
 
 @app.route('/getIndexes', methods=['GET'])
 def getIndexes():
@@ -269,13 +302,16 @@ def getIndexes():
 @app.route('/match', methods=['POST'])
 def getMatchFromDatabaseOrLink():
     onto = ontology.Ontology()
-    print('get query no index ')
+    print(' route : /match ')
     if request.method == 'POST':
         words = request.form['words']
-        print(words)
+        print('user words :'+ words)
         procewords = textProcessing(words)
+        print('process word from user : ')
+        print(procewords)
         # no type selected and not link given
         if request.form['indexes'] == '0' and not request.form['newontology']:
+            print('condition request.form[indexes] == 0 and not request.form[newontology]')
             results = onto.queryOntology(procewords)
             finalResult = resultProcessin(results)
             tmp1 = []
@@ -283,31 +319,36 @@ def getMatchFromDatabaseOrLink():
             for concept in finalResult:
                 if concept.get('subject') not in mylist:
                     conceptLabel = concept.get('label')
-                    words = str(" ".join(words))
+                    words = str(" ".join(procewords))
+                    newLabel = textProcessing(conceptLabel)
+                    joinNewLable = str(" ".join(newLabel))
                     concept.update({'similarity': float(
-                        distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
-                    print(concept)
+                        distance.get_jaro_distance(joinNewLable, str(words), winkler=True, scaling=0.1))})
                     tmp1.append(concept)
                     mylist.append(concept.get('subject'))
             del mylist
             tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
             return render_template('user_result.html', buckets=onto.buckets,  words=words, finalResult=tmp1)
         elif request.form['indexes'] == '0' and request.form['newontology']:
+            print('condition request.form[indexes] == 0 and request.form[newontology]')
             newOnto = request.form['newontology']
-            print(newOnto)
+            print('new ontology'+newOnto)
             results = onto.queryOntology(procewords)
             finalResult = resultProcessin(results)
-            print(finalResult)
             yourresult = onto.personalOntology(procewords, newOnto)
+            print('result from online ontology')
             print(yourresult)
-            print('------------------------------ fin your result ----------------------------------')
+            print('-----------------------------------------------------------------------------------------------')
             tmp1 = []
             mylist = []
             for concept in finalResult:
                 if concept.get('subject') not in mylist:
                     conceptLabel = concept.get('label')
-                    words = str(" ".join(words))
-                    concept.update({'similarity': float(distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                    words = str(" ".join(procewords))
+                    newLabel = textProcessing(conceptLabel)
+                    joinNewLable = str(" ".join(newLabel))
+                    concept.update({'similarity': float(
+                        distance.get_jaro_distance(joinNewLable, str(words), winkler=True, scaling=0.1))})
                     print(concept)
                     tmp1.append(concept)
                     mylist.append(concept.get('subject'))
@@ -346,9 +387,11 @@ def getMatchFromDatabaseOrLink():
             for concept in finalResult:
                 if concept.get('subject') not in mylist:
                     conceptLabel = concept.get('label')
-                    words = str(" ".join(words))
+                    words = str(" ".join(procewords))
+                    newLabel = textProcessing(conceptLabel)
+                    joinNewLable = str(" ".join(newLabel))
                     concept.update({'similarity': float(
-                        distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                        distance.get_jaro_distance(joinNewLable, str(words), winkler=True, scaling=0.1))})
                     print(concept)
                     tmp1.append(concept)
                     mylist.append(concept.get('subject'))
@@ -376,9 +419,11 @@ def getMatchFromDatabaseOrLink():
             for concept in finalResult:
                 if concept.get('subject') not in mylist:
                     conceptLabel = concept.get('label')
-                    words = str(" ".join(words))
+                    words = str(" ".join(procewords))
+                    newLabel = textProcessing(conceptLabel)
+                    joinNewLable = str(" ".join(newLabel))
                     concept.update({'similarity': float(
-                        distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                        distance.get_jaro_distance(joinNewLable, str(words), winkler=True, scaling=0.1))})
                     print(concept)
                     tmp1.append(concept)
                     mylist.append(concept.get('subject'))
@@ -393,14 +438,9 @@ def getMatchFromDatabaseOrLink():
 
             tmp = sorted(tmp, key=lambda k: k['similarity'], reverse=True)
             return render_template('user_result.html', buckets=onto.buckets, words=words, finalResult=tmp1, yourresult=tmp2, combine=tmp)
+    else:
+        return render_template('user_stat.html',  buckets=onto.buckets)
 
-# case 2 an index selected
-
-
-# case 3  no index selected and  a type selected
-
-
-# case 4 an index selected  and a type selected
 
 
 # get a class
@@ -465,7 +505,6 @@ def manualAnnotation():
     else:
         message = 'No data entered'
         return render_template('user_stat.html', buckets=onto.buckets, message=message)
-
 
 
 if __name__ == '__main__':

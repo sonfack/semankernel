@@ -11,9 +11,7 @@ from src.common import database
 class Ontology(object):
 
     def __init__(self):
-        self.buckets = {
-
-        }
+        self.buckets = {}
         self.types = []
         self.ontoGraph = rdflib.Graph()
 
@@ -289,16 +287,22 @@ class Ontology(object):
 
 
     def queryOntology(self, listWords, typeValue=None, indexValue=None):
-
         # Connect to the elastic cluster
+        print('database connection')
         storage = database.Database()
         es = storage.es
         if isinstance(listWords, list) and len(listWords) > 0:
+            print('condition isinstance(listsWords, list) and len(listWords) > 0')
             ourQuery = self.createOrStringQuery(listWords)
+            print('query '+ourQuery)
             if not typeValue is None and not indexValue is None:
-                print('not type None and not index None')
+                print('condition not typeValue is None and not indexValue is None')
+                print('indexValue ')
+                print(indexValue)
+                print('typeValue ')
+                print(typeValue)
                 res = es.search(index=indexValue, doc_type=typeValue, body=
-                                                                            {
+                                                                            {   "size":  50,
                                                                                 "query": {
                                                                                     "query_string": {
                                                                                         "fields": ["label", "*Synonym", "*Namespace", "comment"],
@@ -307,13 +311,15 @@ class Ontology(object):
                                                                                 }
                                                                             }, request_timeout=300
                                 )
+                print('result query')
+                print(res)
                 return res
             elif typeValue is None and not indexValue is None:
-                print('type None and not index None')
+                print('condition typeValue is None and not indexValue is None')
+                print('indexValue')
                 print(indexValue)
-                print(ourQuery)
                 res = es.search(index=indexValue, body=
-                                                        {
+                                                        {   "size":  50,
                                                             "query": {
                                                                 "query_string": {
                                                                     "fields": ["label", "*Synonym", "*Namespace", "comment"],
@@ -328,9 +334,9 @@ class Ontology(object):
                 print(res)
                 return res
             elif typeValue is None and indexValue is None:
-                print('not type None and  index None')
+                print('condition typeValue is None and  indexValue None')
                 res = es.search(body=
-                                    {   "size":  50,
+                                    {   "size":  200,
                                         "query": {
                                             "query_string": {
                                                 "fields": ["label", "*Synonym", "*Namespace", "comment"],
@@ -341,6 +347,8 @@ class Ontology(object):
                                             {"_score": {"order": "desc"}}
                                     }, request_timeout=300
                                 )
+                print('result query')
+                print(res)
                 return res
 
 

@@ -1,0 +1,3 @@
+# ignor pycache folder
+__pycache__/
+
