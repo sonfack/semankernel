@@ -467,8 +467,9 @@ def manualAnnotation():
                 print(valueObj.isnumeric())
                 if not valueObj.isnumeric():
                     valueObj = valueObj.strip('0')
-                    
-                if valueObj in statement[1] and len(valueObj) == len(statement[1]):
+                print(valueObj.lower() )
+                print(statement[1].lower() )
+                if valueObj.lower() in statement[1].lower():
                     listResult.append(
                                         {'uri':uriValue,
                                          'predicate':str(statement[0]),
@@ -489,21 +490,25 @@ def manualAnnotation():
                     return render_template('user_stat.html', buckets=onto.buckets, message=message)
                 else:
                     finalResult = resultProcessin(results)
-                    tmp1 = []
-                    mylist = []
-                    for concept in finalResult:
-                        if concept.get('subject') not in mylist:
-                            conceptLabel = concept.get('label')
-                            words = str(" ".join(words))
-                            concept.update({'similarity': float(
-                                distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
-                            print(concept)
-                            tmp1.append(concept)
-                            mylist.append(concept.get('subject'))
-                    del mylist
-                    tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
-                    print('annotation5')
-                    return render_template('user_result_annotation.html', buckets=onto.buckets, words=words, uri=uriValue, yourresult=tmp1)
+                    if not isinstance(finalResult, bool) and len(finalResult) > 0:
+                        tmp1 = []
+                        mylist = []
+                        for concept in finalResult:
+                            if concept.get('subject') not in mylist:
+                                conceptLabel = concept.get('label')
+                                words = str(" ".join(words))
+                                concept.update({'similarity': float(
+                                    distance.get_jaro_distance(conceptLabel, str(words), winkler=True, scaling=0.1))})
+                                print(concept)
+                                tmp1.append(concept)
+                                mylist.append(concept.get('subject'))
+                        del mylist
+                        tmp1 = sorted(tmp1, key=lambda k: k['similarity'], reverse=True)
+                        print('annotation5')
+                        return render_template('user_result_annotation.html', buckets=onto.buckets, words=words, uri=uriValue, yourresult=tmp1)
+                    else:
+                        message = 'No result available'
+                        return render_template('user_stat.html', buckets=onto.buckets, message=message)
     else:
         message = 'No data entered'
         return render_template('user_stat.html', buckets=onto.buckets, message=message)
