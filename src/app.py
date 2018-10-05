@@ -460,21 +460,21 @@ def manualAnnotation():
             valueObj = request.form['value']
             uri = URIRef(uriValue)
             g = Graph()
-            g.parse(uri)
+            g.parse(uriValue)
             print('annotation3')
             listResult = []
             listProperty = []
-            for subj, pred, obj in g:
-                print(subj)
-                if subj == uri and valueObj in obj:
-                    print(subj, '---', pred, '---', obj)
-                    listResult.append({'uri':subj, 'predicate':pred, 'object':obj})
-                    uriPred = URIRef(pred)
-                    gPred = Graph()
-                    gPred.parse(uriPred)
-                    for objPred in gPred.objects(subject=uriPred, predicate=RDF.type):
-                        print('---Type', objPred)
-                        listProperty.append(objPred)
+            for statement in g.predicate_objects():
+                valueObj = valueObj.strip('0')
+                if valueObj in statement[1] and len(valueObj) == len(statement[1]):
+                    listResult.append(
+                                        {'uri':uriValue,
+                                         'predicate':str(statement[0]),
+                                         'object':str(statement[1])
+                                        }
+                                      )
+            print(listProperty)
+            print(listResult)
             if len(listResult) > 0:
                 print('annotatin4')
                 return render_template('user_result_annotation.html', buckets=onto.buckets, words=valueObj, finalResult=listResult)
@@ -484,7 +484,8 @@ def manualAnnotation():
                 procewords = textProcessing(words)
                 results = onto.queryOntology(procewords)
                 if results is None:
-                    exit()
+                    message = 'No result in knowlodge system and all stored ontologies'
+                    return render_template('user_stat.html', buckets=onto.buckets, message=message)
                 else:
                     finalResult = resultProcessin(results)
                     tmp1 = []
