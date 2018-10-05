@@ -463,9 +463,11 @@ def manualAnnotation():
             g.parse(uriValue)
             print('annotation3')
             listResult = []
-            listProperty = []
             for statement in g.predicate_objects():
-                valueObj = valueObj.strip('0')
+                print(valueObj.isnumeric())
+                if not valueObj.isnumeric():
+                    valueObj = valueObj.strip('0')
+                    
                 if valueObj in statement[1] and len(valueObj) == len(statement[1]):
                     listResult.append(
                                         {'uri':uriValue,
@@ -473,7 +475,6 @@ def manualAnnotation():
                                          'object':str(statement[1])
                                         }
                                       )
-            print(listProperty)
             print(listResult)
             if len(listResult) > 0:
                 print('annotatin4')
