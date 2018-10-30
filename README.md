@@ -10,7 +10,7 @@ In the common/database.py file
   replace the 172.17.0.2 by your Elasticsearch server address. 
 
 After this step, run the app and install all libraries  and go to the backend to upload your ontologies in the Elasticsearch database. 
-http://ip-address/administrator 
+http://ip-address:5000/administrator 
 
 
 ## File structure 
@@ -18,8 +18,17 @@ In our project folder, we have 02 important folders for the project:
 
  - src
  - common
+    - database.py
+    - ontology.py
+    - textprocessing.py
+ - data
+ - static 
+    - css 
+    - fonts
+    - img
+    - js
  - template 
- - data 
+ - app.py
  
 ### src 
 This folder contains the 
